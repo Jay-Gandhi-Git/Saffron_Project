@@ -1,0 +1,119 @@
+﻿@model IEnumerable<SaffronHotelAdminManagement_MVC4.PurchaseDetail>
+@{
+    ViewBag.Title = "PurchaseInformation_Return_Details";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<script type="text/javascript">
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table-force-off");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <div class="clearfix"></div>
+    <div class="inner_content">
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+
+                    <div class="form-group pull-right">
+                        <input type="text" id="search" onkeyup="myFunction();" style="border-radius:10px;" class="search form-control" placeholder="Search item name">
+                    </div>
+                    <h3 class="w3_inner_tittle two">Purchase Details</h3>
+                    @*@{
+                            Session["PurchaseInformation_Details"] = ViewBag.PurchaseDetails_Id;
+                        }*@
+                    @*<a href="@Url.Action("PurchaseDetails", "Admin", new { id = ViewBag.PurchaseDetails_Id })" title="Add New Item">
+                        <img src="~/images/add_2.png" />
+                    </a>*@
+                    <h5 class="w3_inner_tittle two" style="margin-top:10px;">Bill No: <b> @*@Model.First().Purchase.BillNo*@ @ViewBag.BillNo </b></h5>
+                    <h5 class="w3_inner_tittle two">Vendor Name : @ViewBag.VendorName From @ViewBag.City</h5>
+                    <br /><br />
+                    <form class="form-horizontal" method="post">
+                        <div>
+                            <input type="date" name="date" class="form-control" style="width:200px;" id="date" value="@ViewBag.Date">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="table-force-off">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Return Quantity</th>
+                                        <th>Remarks</th>
+                                        <th>Rate</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                                i = i + 1;
+                                            }
+                                            <td>@i</td>
+                                            <td>@Html.DisplayFor(model => item.ItemMaster.ItemName)<input type="hidden" name="item_@i" value="@item.ItemMaster_ID"/></td>
+                                            <td>@Html.DisplayFor(model => item.Quantity.Value)</td>
+                                            @{
+                                        int val = item.Purchase.PurchaseReturns.FirstOrDefault().PurchaseReturnDetails.Where(a => a.ItemMaster_ID == item.ItemMaster_ID).Select(a => a.Quatntity).FirstOrDefault().Value;
+                                            }
+                                            <td><input type="number" name="returnQty_@i" value="@((item.Purchase.PurchaseReturns.FirstOrDefault().PurchaseReturnDetails.Where(a=>a.ItemMaster_ID==item.ItemMaster_ID).Select(a=>a.Quatntity))!=null?val:0)"  /></td>
+                                            <td><input type="text" name="remak_@i" value=""  placeholder="If any" /></td>
+                                            <td>₹@Html.DisplayFor(model => item.Rate.Value)/-</td>
+                                            <td>₹@Html.DisplayFor(model => item.Amount.Value)/-</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-sm-offset-1" style="margin-top:20px;">
+                            <input type="submit" value="Save" class="frmButton" />
+                            <a href="@Url.Action("PurchaseInformation", "Admin")" class="btn btn-default">
+                                Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

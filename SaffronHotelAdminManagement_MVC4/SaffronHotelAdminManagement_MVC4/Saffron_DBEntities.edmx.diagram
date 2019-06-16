@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aea22e53a1d847c9ac2d2b16fc3236e7" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Saffron_DBModel.Admin" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.CustomerDetail" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.Floor" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.ItemCategory" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.ItemMaster" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.ItemUsedStock" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.OrderDetailMaster" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.OrderMaster" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.Payment" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.Purchase" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.PurchaseDetail" Width="1.5" PointX="12.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.TableType" Width="1.5" PointX="1.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.Vendor" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.WaiterAttendence" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Saffron_DBModel.WaiterMaster" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="Saffron_DBModel.FK_OrderMaster_ToCustomerDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_ItemMaster_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_ItemmUsedStock_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_OrderDetailMaster_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_PurchaseDetails_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_OrderDetailMaster_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_OrderMaster_ToWaiterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_Payment_OrderMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_Purchase_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_PurchaseDetails_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Saffron_DBModel.FK_WaiterAttendence_WaiterMaster" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Saffron_DBModel.TableMaster" Width="1.5" PointX="3.75" PointY="12.875" />
+        <AssociationConnector Association="Saffron_DBModel.FK_TableMaster_ToTable" />
+        <AssociationConnector Association="Saffron_DBModel.FK_OrderMaster_ToTableMaster" />
+        <AssociationConnector Association="Saffron_DBModel.FK_TableMaster_ToTable_1" />
+        <EntityTypeShape EntityType="Saffron_DBModel.PurchaseReturn" Width="1.5" PointX="12.25" PointY="1.375" />
+        <AssociationConnector Association="Saffron_DBModel.FK_PurchaseReturn_ToPurchase" />
+        <EntityTypeShape EntityType="Saffron_DBModel.PurchaseReturnDetail" Width="1.5" PointX="14.5" PointY="9.75" />
+        <AssociationConnector Association="Saffron_DBModel.FK_Table_ToItemMaster" />
+        <AssociationConnector Association="Saffron_DBModel.FK_Table_ToPurchaseReturn" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

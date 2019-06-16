@@ -1,0 +1,36 @@
+﻿<div class="table-responsive" style="overflow:auto;height:400px;">
+
+
+
+
+    <table>
+        <tr>
+            <th>Costomer Name</th>
+            <th>Date</th>
+            <th>Bill No.</th>
+            <th>Total Amount</th>
+        </tr>
+        @{
+
+            int sr = 0;
+
+            var temp = ViewData["PendingOrderNotificationData"] as IEnumerable<SaffronHotelAdminManagement_MVC4.OrderMaster>;
+            foreach (var item in temp)
+            {
+                <tr>
+                    <td>@item.CustomerDetail.CustomerName</td>
+                    <td>@item.Date.Value.ToString("dd-MM-yyyy")</td>
+                    <td>@item.BillNo</td>
+                    <td>₹@item.OrderDetailMasters.Sum(am => am.Amount.Value)/-</td>
+
+                </tr>
+            }
+        }
+
+    </table>
+
+
+
+
+
+</div>

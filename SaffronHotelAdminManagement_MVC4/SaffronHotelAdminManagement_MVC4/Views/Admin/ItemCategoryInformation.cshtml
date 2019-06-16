@@ -1,0 +1,136 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SaffronHotelAdminManagement_MVC4.ItemCategory>
+         
+@{
+    
+    ViewBag.Title = "ItemCategoryInformation";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <div class="clearfix"></div>
+    <div class="inner_content">
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+                    <a  href="@Url.Action("ItemCategoryCreate", "Admin")" title="Add new item category">
+                        <img src="~/images/add_2.png" />
+                    </a>
+                    <h3 class="w3_inner_tittle two">Item Category List</h3>
+
+                    <div class="table-responsive">
+                        <table id="table-force-off">
+                            <thead>
+                                <tr>
+                                    <th>Item CategoryName</th>
+                                    <th>Menu Item</th>
+                                    <th>Assets</th>
+                                    <th>Service</th>
+                                    <th>Row Metirial</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                            {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.ItemCategoryName)</td>
+                                        <td>@if(item.IsMenuItem.Value){<span>Yes</span>}else{<span>No</span>}</td>
+                                        <td>@if (item.IsAssets.Value) {<span>Yes</span> }else{<span>No</span>}</td>
+                                        <td>@if (item.IsService.Value) { <span>Yes</span>} else { <span>No</span>}</td>
+                                        <td>@if (item.IsRawMetirial.Value) { <span>Yes</span>}else{<span>No</span> }</td>
+                                        <td>@Html.ActionLink("Edit", "ItemCategoryView", new { id = item.ItemCategory_ID }) | @Html.ActionLink("Delete", "ItemCategoryDelete", new { id = item.ItemCategory_ID })</td>
+                                    </tr>
+                            }
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("ItemCategoryInformation", new { page }))
+                        </div>
+                    </div>
+
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/jquery-2.1.4.min.js"></script>
+<script src="~/js/modernizr.custom.js"></script>
+
+<script src="~/js/classie.js"></script>
+<script src="~/js/gnmenu.js"></script>
+<script>
+    new gnMenu(document.getElementById('gn-menu'));
+</script>
+<!-- tables -->
+
+<script type="text/javascript" src="~/js/jquery.basictable.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table').basictable();
+
+        $('#table-breakpoint').basictable({
+            breakpoint: 768
+        });
+
+        $('#table-swap-axis').basictable({
+            swapAxis: true
+        });
+
+        $('#table-force-off').basictable({
+            forceResponsive: false
+        });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+
+        $('#table-two-axis').basictable();
+
+        $('#table-max-height').basictable({
+            tableWrapper: true
+        });
+    });
+</script>
+<!-- //js -->
+<script src="~/js/screenfull.js"></script>
+<script>
+    $(function () {
+        $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+        if (!screenfull.enabled) {
+            return false;
+        }
+
+
+
+        $('#toggle').click(function () {
+            screenfull.toggle($('#container')[0]);
+        });
+    });
+</script>
+<script src="~/js/jquery.nicescroll.js"></script>
+<script src="~/js/scripts.js"></script>
+
+<script type="text/javascript" src="~/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/js/bootstrap-3.1.1.min.js"></script>
+

@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../js/jquery-2.1.4.min.js"></script>
+    <link href="SweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="SweetAlert/sweetalert.min.js"></script>
+   
+
+    <script src="SweetAlert/tempSweetAlert.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            check();
+            amt();
+        });
+        function check() {
+            if (document.getElementById('yes').checked) {
+                document.getElementById('name').style.display = 'block';
+                document.getElementById('select').style.display = 'block';
+            }
+            else if (document.getElementById('no').checked) {
+                document.getElementById('name').style.display = 'none';
+                document.getElementById('select').style.display = 'none';
+            }
+        }
+        function cal() {
+            var f = document.getElementById('f').value;
+            var s = document.getElementById('s').value;
+            document.getElementById('a').value = f * s;
+        }
+        //$(document).ready(function () {
+        //    alert('hi');
+        //    $('#search').on('keyup', function () {
+        //        alert('jalu');
+        //        var searchTerm = $(this).val().toLowerCase();
+        //        $('#userTbl tbody tr').each(function () {
+        //            var lineStr = $(this).text().toLowerCase();
+        //            if (lineStr.indexOf(searchTerm) === -1) {
+        //                $(this).hide();
+        //            } else {
+        //                $(this).show();
+        //            }
+        //        });
+        //    });
+        //});
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("userTbl");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        function checkSweetAlert() {
+            //swal("Good job!", "You clicked the button!", "success");
+
+            //swal("Are you sure you want to do this?", {
+            //    buttons: ["Oh noez!", "Aww yiss!"],
+            //});
+
+            //sweetAlert("Hi");
+
+            swal("Are You Sure!", "This item will be deletd!", "warning");
+
+            //swal({
+            //    title: "Are you sure?",
+            //    text: "Once deleted, you will not be able to recover this imaginary file!",
+            //    icon: "warning",
+            //    buttons: true,
+            //    dangerMode: true,
+            //})
+            //.then((willDelete) => {
+            //    if(willDelete) {
+            //    swal("Poof! Your imaginary file has been deleted!", {
+            //        icon: "success",
+                    
+            //    });
+            //        } else {
+            //    swal("Your imaginary file is safe!");
+            //        }
+            //        });
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-3">
+            <input type="radio" name="yes" id="yes" value="Yes" checked onclick="check()" /><span>Yes</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="yes" id="no" value="No" onclick="check()" /><span>No</span>
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="name" id="name" />
+            <select id="select">
+                <option>abhdhsba</option>
+                <option>abhdhsba</option>
+                <option>abhdhsba</option>
+                <option>abhdhsba</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="name" value="1" id="f" oninput="cal()" disabled />
+            <input type="number" name="name" id="s" oninput="cal()" />
+            <input type="number" name="name" id="a" value="0.0" disabled />
+            <input type="submit" value="click" onclick="cal()" />
+        </div>
+    </div>  <br /><br /><br /><br />
+    <div>
+        <div class="form-group pull-right">
+            <input type="text" id="search" onkeyup="myFunction();" class="search form-control" placeholder="What you looking for?">
+        </div>
+        <table class="table table-striped" id="userTbl">
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Moe</td>
+                <td>john@moe.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Doe</td>
+                <td>mary@doe.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Rest</td>
+                <td>july@gmail.com</td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top:50px;">
+        <input type="button" value="Sweet Alert" onclick="checkSweetAlert();" />
+    </div>
+</body>
+</html>

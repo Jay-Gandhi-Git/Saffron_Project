@@ -1,0 +1,133 @@
+﻿@model IEnumerable<SaffronHotelAdminManagement_MVC4.Floor>
+@{
+    ViewBag.Title = "FloorInformation";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+
+    <div class="clearfix"></div>
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <!-- tables -->
+
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+                    <a  href="@Url.Action("FloorCreate", "Admin")">
+                        @*Create New Floor*@
+                        <img src="~/images/add_2.png" />
+                    </a>
+                    <h3 class="w3_inner_tittle two">Floor List</h3>
+
+                    <div class="table-responsive">
+                        <table id="table-force-off">
+                            <thead>
+                                <tr>
+                                    <th>Floor Number</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                            {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.FloorNo)</td>
+                                        <td>@Html.ActionLink("Edit", "FloorView", new { id = item.Floor_ID }) | @Html.ActionLink("Delete", "FloorDelete", new { id = item.Floor_ID })</td>
+                                    </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/jquery-2.1.4.min.js"></script>
+<script src="~/js/modernizr.custom.js"></script>
+
+<script src="~/js/classie.js"></script>
+<script src="~/js/gnmenu.js"></script>
+<script>
+    new gnMenu(document.getElementById('gn-menu'));
+</script>
+<!-- tables -->
+
+<script type="text/javascript" src="~/js/jquery.basictable.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table').basictable();
+
+        $('#table-breakpoint').basictable({
+            breakpoint: 768
+        });
+
+        $('#table-swap-axis').basictable({
+            swapAxis: true
+        });
+
+        $('#table-force-off').basictable({
+            forceResponsive: false
+        });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+
+        $('#table-two-axis').basictable();
+
+        $('#table-max-height').basictable({
+            tableWrapper: true
+        });
+    });
+</script>
+<!-- //js -->
+<script src="~/js/screenfull.js"></script>
+<script>
+    $(function () {
+        $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+        if (!screenfull.enabled) {
+            return false;
+        }
+
+
+
+        $('#toggle').click(function () {
+            screenfull.toggle($('#container')[0]);
+        });
+    });
+</script>
+<script src="~/js/jquery.nicescroll.js"></script>
+<script src="~/js/scripts.js"></script>
+
+<script type="text/javascript" src="~/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/js/bootstrap-3.1.1.min.js"></script>
+

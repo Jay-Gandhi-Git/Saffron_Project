@@ -1,0 +1,268 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SaffronHotelAdminManagement_MVC4.OrderDetailMaster>
+@{
+    ViewBag.Title = "OrderDetailCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+       
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Order Create</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Food Category</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <select name="ItemCategoryId" id="ItemCategoryId" class="form-control1 icon">
+                                                @{
+                                                    var ItemCategoryList = ViewBag.ItemCategoryName as List<SaffronHotelAdminManagement_MVC4.ItemCategory>;
+                                                }
+                                                @foreach (var item in ItemCategoryList)
+                                                {
+                                                <option value="@item.ItemCategory_ID">@item.ItemCategoryName</option>
+                                                }
+                                            </select>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    getRecord();
+                                                    amtCal();
+                                                    //getRate();
+                                                    //amt();
+                                                });
+                                                $("#ItemCategoryId").change(function () {
+                                                    //alert('Itemcategorychange');
+                                                    getRecord();
+                                                });
+                                              
+                                                function getRecord() {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "/Admin/OrderDetailCreate_Bind",
+                                                        data: '{ItemCategory_Id:"' + $("#ItemCategoryId").val() + '"}',
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        success: OnSuccess,
+                                                        failure: function (response) {
+                                                            alert(response.responseText);
+                                                        },
+                                                        error: function (response) {
+                                                            alert(response.responseText);
+                                                        }
+                                                    });
+                                                }
+                                                function getRate() {
+                                                    var a = $("#ItemMasterId").val();
+
+                                                        $.ajax({
+                                                        type: "POST",
+                                                        url: "/Admin/OrderDetailCreate_Bind_Rate",
+                                                        data: '{ItemMaster_Id:"' + $("#ItemMasterId").val() + '"}',
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        success: RateData,
+                                                        failure: function (response) {
+                                                            alert(response.responseText);
+                                                        },
+                                                        error: function (response) {
+                                                            alert(response.responseText);
+                                                        }
+                                                    });
+                                                }
+                                                function OnSuccess(response) {
+                                                    var model = response;
+                                                    $("#ItemMasterId").html("");
+                                                    for (var i = 0; i < model.length; i++) {
+                                                        var s = model[i];
+                                                        $("#ItemMasterId").append($('<option></option>').val(s.ItemMaster_ID).html(s.ItemName));
+                                                    }
+                                                    getRate();
+                                                }
+                                                //$("#ItemMasterId").change(function () {
+                                                //    alert('helloo');
+                                                //    getRate();
+                                                //});
+                                                function RateData(response) {
+                                                    var model = response;
+                                                    $("#rate").html("");
+                                                    $("#rate").val(model);
+                                                    $("#amt").val(model * 1);
+                                                }
+                                                function amtCal() {
+                                                    //var a = $("#qty").val;
+                                                    var a = document.getElementById("qty").value;
+                                                    //var b = $("#rate").val;
+                                                    var b = document.getElementById("rate").value;
+                                                    var c = parseFloat(a) * parseFloat(b);
+                                                    document.getElementById("amt").value = parseFloat(a) * parseFloat(b);
+                                                    //$("#amt").val = parseFloat(a) * parseFloat(b);
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Food Name</label>
+                                    <div class="col-md-4">
+                                        <div id="hello" class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <select name="ItemMasterId" id="ItemMasterId" class="form-control1 icon" onchange="getRate();">
+                                                @*@{
+                                                        var ItemList = ViewBag.ItemName as List<SaffronHotelAdminManagement_MVC4.ItemMaster>;
+                                                    }
+                                                    @foreach (var item in ItemList)
+                                                    {
+                                                        <option value="@item.ItemMaster_ID">@item.ItemName</option>
+                                                    }*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Rate</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-inr"></i>
+                                            </span>
+                                            <input type="number" name="rate" id="rate" class="form-control1 icon" required="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Qunatatity</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="number" value="1" oninput="amtCal();" id="qty" name="qty" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Amount</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-inr"></i>
+                                            </span>
+                                            <input type="number" name="amt" id="amt" class="form-control1 icon" required="" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Add" class="frmButton" />
+                                </div>
+                                <div class="col-sm-offset-10">
+                                    <a href="@(Url.Action("OrderMasterInformation", "Admin"))" class="btn btn-success">
+                                        Complete Order
+                                    </a>
+                                </div>
+                            </form>
+
+                            <div class="table-responsive">
+                                <h3 class="w3_inner_tittle two">Order Item List</h3>
+                                <table id="table-force-off">
+                                    <thead>
+                                        <tr>
+                                            <th>SR.NO</th>
+                                            <th>Item</th>
+                                            <th>Qunatatity</th>
+                                            <th>Rate</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int i = 0;
+                                        }
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                @{
+                                            i = i + 1;
+                                                }
+                                                <td>@i</td>
+                                                <td>@item.ItemMaster.ItemName</td>
+                                                <td>@item.Quantity</td>
+                                                <td>₹@item.Rate/-</td>
+                                                <td>₹@item.Amount/-</td>
+                                                <td><a href="@Url.Action("OrderDetailsDeleteOrderItem", "Admin", new { temp = item.OrderDetail_ID })" onclick="return confirm('Are youu sure??')">Delete</a> | @Html.ActionLink("+", "OrderDetailsAddQuantity", new { temp = item.OrderDetail_ID }) | <a href="@Url.Action("OrderDetailsSingleDeleteQuantity", "Admin", new { temp = item.OrderDetail_ID })">-</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="pagination">
+                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                    @Html.PagedListPager(Model, page => Url.Action("OrderDetailCreate", new {id=Session["OrderMaster_Id"], page=page }))
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+
+            </div>
+
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+
+
+
+
+
+    </div>
+</div>
+

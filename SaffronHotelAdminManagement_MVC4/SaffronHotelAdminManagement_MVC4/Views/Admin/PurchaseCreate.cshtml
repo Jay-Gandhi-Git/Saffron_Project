@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "PurchaseCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+        
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Purchase</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Vendor Name</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user-md"></i>
+                                            </span>
+                                            <select name="VendorId" class="form-control1 icon">
+                                                @{
+                                                    var VendorNameList = ViewBag.VendorName as List<SaffronHotelAdminManagement_MVC4.Vendor>;
+                                                }
+                                                @foreach (var item in VendorNameList)
+                                                {
+                                                    if (Session["Vendor_Id"]!=null && Convert.ToInt32(Session["Vendor_Id"]) == item.Vendor_ID)
+                                                    {
+                                                        <option value="@item.Vendor_ID" selected>@item.VendorName - @item.City</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Vendor_ID">@item.VendorName - @item.City</option>
+                                                    }
+                                                    
+                                                }
+                                            </select>
+                                            <a class="input-group-addon addbtn" href="@Url.Action("VendorCreate","Admin")"><img src="~/images/add_1.png" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Bill Number</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="number" id="number" min="2" max="100000" name="number" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="date" name="date" id="date" value="@ViewBag.Date" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Next" class="frmButton" />
+                                    <a href="@((Session["Vendor_Id"]!=null)?Url.Action("VendorInformation","Admin"): Url.Action("PurchaseInformation","Admin"))" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+            </div>
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+    </div>
+    <!-- //inner_content-->
+</div>
+
+
+

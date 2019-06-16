@@ -1,0 +1,339 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/component.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/export.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style_grid.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1500).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+
+
+
+
+<div class="inner_content">
+    <!-- /inner_content_w3_agile_info-->
+    <div class="inner_content_w3_agile_info">
+        <!-- /agile_top_w3_grids-->
+        <div class="agile_top_w3_grids">
+            <ul class="ca-menu">
+                <li>
+                    @*TotalPendingOrders*@
+                    <a href="@Url.Action("OrderMasterInformation", "Admin")">
+                        <i class="fa fa-first-order" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main">@ViewBag.TotalPendingOrders</h4>
+                            <h3 class="ca-sub">Total Pending Orders</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    @*TotalProcessOrders*@
+                    <a href="@Url.Action("OrderMasterInformation", "Admin")">
+                        <i class="fa fa-first-order" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main one">@ViewBag.TotalProcessOrders</h4>
+                            <h3 class="ca-sub one">Total Process Orders</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    @*TotalCompleteOrders*@
+                    <a href="@Url.Action("OrderMasterInformation", "Admin")">
+                        <i class="fa fa-first-order" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main two">@ViewBag.TotalCompleteOrders</h4>
+                            <h3 class="ca-sub  two">Total Complete Orders</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    @*TotalCencelOrders*@
+                    <a href="@Url.Action("OrderMasterInformation", "Admin")">
+                        <i class="fa fa-first-order" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main three">@ViewBag.TotalCencelOrders</h4>
+                            <h3 class="ca-sub three">Total Cencel Orders</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("PurchaseInformation", "Admin")">
+                        <i class="fa fa-th" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main four">@ViewBag.TotalPurchases</h4>
+                            <h3 class="ca-sub four">Total Purchases</h3>
+                        </div>
+                    </a>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul class="ca-menu">
+                <li>
+                    <a href="@Url.Action("VendorInformation", "Admin")">
+
+                        <i class="fa fa-user-md" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main">@ViewBag.TotalVendors</h4>
+                            <h3 class="ca-sub">Total Vendors</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("CustomerInformation","Admin")">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main one">@ViewBag.TotalCustomers</h4>
+                            <h3 class="ca-sub one">Total Cusotmers</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("TotalOrders", "Admin")">
+                        <i class="fa fa-first-order" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main two">@ViewBag.TotalOrders</h4>
+                            <h3 class="ca-sub two">Total Orders</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("TableMasterInformation","Admin")">
+                        <i class="fa fa-table" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main three">@ViewBag.TotalTabels</h4>
+                            <h3 class="ca-sub three">Total Tables</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("WaiterInformation","Admin")">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main four">@ViewBag.TotalWaiters</h4>
+                            <h3 class="ca-sub four">Total Waiters</h3>
+                        </div>
+                    </a>
+                </li>
+
+                <div class="clearfix"></div>
+            </ul>
+
+            <ul class="ca-menu">
+                <li>
+                    <a href="@Url.Action("OurMenu","Admin")">
+                        <i class="fa fa-cutlery" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main">@ViewBag.TotalMenuItems</h4>
+                            <h3 class="ca-sub">Our Menu</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("RawMetirialsList", "Admin")">
+                        <i class="fa fa-themeisle" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main one">@ViewBag.TotalRawMetirial</h4>
+                            <h3 class="ca-sub one">Raw Metirials</h3>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("AssetsList", "Admin")">
+                        <i class="fa fa-sitemap" aria-hidden="true"></i>
+                        <div class="ca-content">
+                            <h4 class="ca-main two">@ViewBag.TotalAssests</h4>
+                            <h3 class="ca-sub  two">Assets</h3>
+                        </div>
+                    </a>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+
+        </div>
+        <div class="charts_section_agileinfo">
+            <h3 class="w3_inner_tittle two">Top Item Saled</h3>
+            <div id="chartdiv3"></div>
+        </div>
+        @*<div class="agile_top_w3_grids">
+                <ul class="ca-menu">
+                    <li>
+                        <a href="#">
+
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <div class="ca-content">
+                                <h4 class="ca-main">16,808</h4>
+                                <h3 class="ca-sub">New Companies</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <div class="ca-content">
+                                <h4 class="ca-main one">26,808</h4>
+                                <h3 class="ca-sub one">New Clients</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                            <div class="ca-content">
+                                <h4 class="ca-main two">29,008</h4>
+                                <h3 class="ca-sub two">New Projects</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            <div class="ca-content">
+                                <h4 class="ca-main three">49,436</h4>
+                                <h3 class="ca-sub three">Old Projects</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-clone" aria-hidden="true"></i>
+                            <div class="ca-content">
+                                <h4 class="ca-main four">30,808</h4>
+                                <h3 class="ca-sub four">New Orders</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="clearfix"></div>
+                </ul>
+            </div>*@
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+
+<script src="js/classie.js"></script>
+<script src="js/gnmenu.js"></script>
+<script>
+    new gnMenu(document.getElementById('gn-menu'));
+</script>
+<!-- /amcharts -->
+<script src="js/amcharts.js"></script>
+<script src="js/serial.js"></script>
+<script src="js/export.js"></script>
+<script src="js/light.js"></script>
+<script src="js/xy.js"></script>
+<script src="js/gauge.js"></script>
+<script src="js/radar.js"></script>
+<script src="js/pie.js"></script>
+<script>
+
+    // generate data
+    var chartData = [];
+    var model = 0;
+    var f = 0;
+    TopSale();
+    function TopSale() {
+        //alert('ajax TopSale is working');
+        $.ajax({
+            type: "POST",
+            url: "/Admin/TopSale_Item",
+            data: '',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                model = response;
+                for (var i = 0; i < model.length; i++) {
+                    chartData.push({
+                        Item: ""+model[i].ItemName,
+                        Qty: model[i].Quantity
+                    });
+                }
+
+                var chart = AmCharts.makeChart("chartdiv3", {
+                    "type": "serial",
+                    "theme": "light",
+                    "marginRight": 80,
+                    "dataProvider": chartData,
+                    "valueAxes": [{
+                        "axisTitleOffset": 20,
+                        "minimum": 0,
+                        "axisAlpha": 0.15
+                    }],
+                    "startDuration": 2,
+                    "graphs": [{
+                        "balloonText": "[[value]] No Of Qty Sales",
+                        "bullet": "round",
+                        "lineThickness": 2,
+                        "valueField": "Qty"
+                    }],
+                    "categoryField": "Item",
+                    "autoMarginOffset": 5,
+                    "columnWidth": 1,
+
+                    "export": {
+                        "enabled": true
+                    }
+                });
+
+            },
+            failure: function (response) {
+                alert('fail');
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert('error');
+                alert(response.responseText);
+            }
+        });
+    }
+
+    //alert(chartData.length);
+
+    //generateChartData();
+
+    
+
+    //function generateChartData() {
+    //    var model = response;
+
+
+    //    for (var i = 0; i < model.length; i++) {
+    //        var s = model[i];
+    //        alert(i+" "+s.ItemName +" "+ s.Quantity);
+    //        chartData.push({
+    //            Item: "I-"+i,
+    //            Qty: i
+    //        });
+    //    }
+    //    alert(chartData);
+
+    //}
+
+
+    //generateChartData();
+
+    
+
+    
+</script>

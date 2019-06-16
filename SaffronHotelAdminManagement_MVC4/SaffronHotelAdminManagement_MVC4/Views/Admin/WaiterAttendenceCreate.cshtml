@@ -1,0 +1,154 @@
+﻿@model IEnumerable<SaffronHotelAdminManagement_MVC4.WaiterMaster>
+@{
+    ViewBag.Title = "WaiterAttendenceCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+<script type="text/javascript">
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table-force-off");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+        
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <div class="form-group pull-right">
+                                <input type="text" id="search" onkeyup="myFunction();" style="border-radius:10px;" class="search form-control" placeholder="Search waiter name">
+                            </div>
+                            <h3 class="w3_inner_tittle two">Waiter Attendence</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+
+
+
+                            <form class="form-horizontal" method="post">
+
+                                @*<div class="form-body ">
+                                        <div data-example-id="simple-form-inline">
+                                            <div class="form-group">
+                                                Select Date <input type="date" name="date" class="form-control" id="date" value="@ViewBag.Date" />
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div>
+                                    <input type="date" name="date" class="form-control" style="width:200px;" id="date" value="@ViewBag.Date">
+                                </div>
+                                <div class="table-responsive">
+
+                                    <table id="table-force-off">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Contact No.</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                int i = 0;
+                                            }
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    @{
+                                                i = i + 1;
+                                                    }
+                                                    <td>@i</td>
+                                                    <td><input type="checkbox" name="Chk_@i" checked /><input type="hidden" name="Hd_@i" value="@item.WaiterMaster_Id" /></td>
+                                                    <td>@Html.DisplayFor(model => item.WaiterName)</td>
+                                                    <td>@Html.DisplayFor(model => item.ContctNo)</td>
+                                                    <td>@Html.DisplayFor(model => item.Email)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @*<div class="pagination">
+                                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                            @Html.PagedListPager(Model, page => Url.Action("WaiterInformation", new { page }))
+                                        </div>*@
+                                </div>
+
+
+
+                                <div class="col-sm-offset-1" style="margin-top:20px;">
+                                    <input type="submit" value="Save" class="frmButton" />
+                                    <a href="@Url.Action("WaiterInformation", "Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+
+            </div>
+
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+
+
+
+
+
+    </div>
+</div>
+
+
+

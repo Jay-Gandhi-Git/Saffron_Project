@@ -1,0 +1,33 @@
+﻿@*@model IEnumerable<SaffronHotelAdminManagement_MVC4.ItemMaster>*@
+<div class="table-responsive" style="overflow:auto;height:400px;">
+
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Re-Order Level</th>
+            <th>Minimum Qty.</th>
+            <th>Closing Bal.</th>
+        </tr>
+        @{
+
+            int sr = 0;
+
+            var temp = ViewData["TempData"] as IEnumerable<SaffronHotelAdminManagement_MVC4.ItemMaster>;
+            foreach (var item in temp)
+            {
+                <tr>
+                    <td>@item.ItemName</td>
+                    <td>@item.ReOrderLevel</td>
+                    <td>@item.MinimumQuantatity</td>
+                    <td>@((item.PurchaseDetails.Count > 0 ? item.PurchaseDetails.Sum(a => a.Quantity) : 0) - (item.ItemUsedStocks.Count > 0 ? item.ItemUsedStocks.Sum(a => a.Quantity) : 0))</td>
+
+                </tr>
+            }
+        }
+
+    </table>
+
+
+
+
+</div>

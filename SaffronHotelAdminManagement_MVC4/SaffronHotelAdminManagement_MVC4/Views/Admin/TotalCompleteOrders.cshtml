@@ -1,0 +1,245 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SaffronHotelAdminManagement_MVC4.OrderMaster>
+@{
+    ViewBag.Title = "TotalCompleteOrders";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <div class="clearfix"></div>
+    <div class="inner_content">
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+                    @* <a href="@Url.Action("OrderMasterCreate", "Admin")" title="Create New Order">
+                             Create Table Type
+                            <img src="~/images/add_2.png" />
+                        </a>*@
+
+                    <h3 class="w3_inner_tittle two">Complete Order List</h3>
+                    @*<label>Order Status</label>
+                        <select id="status" name="status"  class="form-control1 icon" style="width:100px;">
+                            <option value="0">Panding Order</option>
+                            <option value="1">Process</option>
+                            <option value="2">Complete</option>
+                            <option value="3">Cancel</option>
+                        </select>&nbsp;&nbsp;&nbsp;*@
+                    @*<label>Start Date</label>
+                    <input type="date" class="form-control1 icon" style="width:150px;" onchange="getRecord(1);" name="stDate" id="stDate" value="@ViewBag.date" />&nbsp;&nbsp;&nbsp;
+                    <label>End Date</label>
+                    <input type="date" class="form-control1 icon" style="width:150px;" onchange="getRecord(1);" name="enDate" id="enDate" value="@ViewBag.date" />*@
+
+                    @if (ViewBag.errorMsg != null)
+                    {
+                        <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                    }
+                    <script type="text/javascript">
+                        $(function () {
+                            getRecord(1)
+                        });
+                        $("body").on("click", ".page", function () {
+                            getRecord(parseInt($(this).attr('page')));
+                        });
+                        $("#status").change(function () {
+                            getRecord(1)
+                        });
+                        function getRecord(page) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Admin/TotalCompleteOrders",
+                                data: '{page:"' + page + '"}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: OnSuccess,
+                                failure: function (response) {
+                                    alert(response.responseText);
+                                },
+                                error: function (response) {
+                                    alert(response.responseText);
+                                }
+                            });
+                        }
+                        function OnSuccess(response) {
+                            var model = response;
+
+                            var row = $("#BlanckRow tr:first-child").removeAttr("style").clone(true);
+                            $("#table-force-off tr").not($("#table-force-off tr:first-child")).remove();
+                            var sr = 0;
+                            for (var i = 0; i < model.length; i++) {
+                                var s = model[i];
+
+                                $("td", row).eq(0).html(++sr);
+                                $("td", row).eq(1).html(s.OrderType);
+                                $("td", row).eq(2).html(s.TableNo);
+                                $("td", row).eq(3).html(s.CustomerName);
+                                $("td", row).eq(4).html(s.Date);
+                                $("td", row).eq(5).html(s.BillNo);
+                                $("td", row).eq(6).html(s.TotalAmount);
+                                $("td", row).eq(7).html(s.TotalItem);
+                                @*  var editLink = '@Url.Action("ItemMasterView", "Admin", new { id = "-1" })';
+                                    editLink = editLink.replace("-1", s.ItemMaster_ID);
+                                    var deleteLink = '@Url.Action("ItemMasterDelete", "Admin", new { id = "-1" })';
+                                    deleteList = deleteLink.replace("-1", s.ItemMaster_ID);*@
+
+                                //Prcess link start
+                                @*var prolink = '@Url.Action("OrderMasterIsProcess", "Admin", new { id = -1 })';
+                                    prolink = prolink.replace("-1", s.OrderMaster_ID)
+                                    //Prcess link end
+
+                                    //complete and cancel link start
+                                    var CompLink = '@Url.Action("OrderMasterIsComplete", "Admin", new { id = -1 })';
+                                    CompLink = CompLink.replace("-1", s.OrderMaster_ID);
+                                    var CanLink = '@Url.Action("OrderMasterIsCancle", "Admin", new { id = -1 })';
+                                    CanLink = CanLink.replace("-1", s.OrderMaster_ID);
+                                    //complete and cancel link end
+
+                                    //payment and generate bill link start
+                                    var PayLink = '@Url.Action("PaymentProcess", "Admin", new { id = -1 })';
+                                    PayLink = PayLink.replace("-1", s.OrderMaster_ID);
+                                    var GenBillLink = '@Url.Action("BillGenerate", "Admin", new { id = -1 })';
+                                    GenBillLink = GenBillLink.replace("-1", s.OrderMaster_ID);
+                                    //payment and generate bill link end*@
+
+                                //detail link start
+                                var DetailLink = '@Url.Action("OrderMasterDeatil", "Admin", new { id = -1 })';
+                                DetailLink = DetailLink.replace("-1", s.OrderMaster_ID);
+                                $("td", row).eq(8).html("<a href='" + DetailLink + "'  >Detail</a>");
+                                //detail link end
+
+                                //if (parseInt(s.StausId) == 0) {//pandinng  status..Process link and detail link
+                                //    $("td", row).eq(8).html("<a href='" + prolink + "' >Process</a> | <a href='" + CanLink + "' >Cancel</a> | <a href='" + DetailLink + "' >Detail</a> ");
+                                //}
+                                //else if (parseInt(s.StausId) == 1) {
+                                //    //process status ...complete and cancel link and detail link
+                                //    $("td", row).eq(8).html("<a href='" + CompLink + "' >Complete</a> | <a href='" + CanLink + "' >Cancel</a> | <a href='" + DetailLink + "'  >Detail</a>");
+                                //}
+                                //else if (parseInt(s.StausId) == 2) {
+                                //    //complete status...payment and generate bill link and detail link
+                                //    $("td", row).eq(8).html("<a href='" + PayLink + "'  >Payment</a> | <a href='" + GenBillLink + "'  >Generate Bill</a> | <a href='" + DetailLink + "'  >Detail</a>");
+                                //}
+                                //else if (parseInt(s.StausId) == 3) {
+                                //    //cancel status.....detail link only
+                                //    $("td", row).eq(8).html("<a href='" + DetailLink + "'  >Detail</a>");
+                                //}
+                                //$("td", row).eq(5).html("<a href='" + editLink + "'>Edit</a> | <a href='" + deleteList + "'>Delete</a>");
+                                $("#table-force-off").append(row);
+                                row = $("#BlanckRow tr:first-child").clone(true);
+
+                                $(".pagination").ASPSnippets_Pager({
+                                    ActiveCssClass: "current",
+                                    PagerCssClass: "pager",
+                                    PageIndex: s.PageIndex,
+                                    PageSize: s.PageSize,
+                                    RecordCount: s.RecordCount
+                                });
+
+                            }
+                        }
+                    </script>
+                    <div class="table-responsive">
+                        <table id="table-force-off">
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Order Type</th>
+                                <th>Table No.</th>
+                                <th>Coustomer Name</th>
+                                <th>Date</th>
+                                <th>Bill No.</th>
+                                <th>Total Amount</th>
+                                <th>Total Item</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Course</td>
+                                <td>Teacher</td>
+
+                            </tr>
+                        </table>
+
+                        <table id="BlanckRow" style="display:none">
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Course</td>
+                                <td>Teacher</td>
+
+                            </tr>
+                        </table>
+                        <ul class="pagination"></ul>
+                        @*<div class="pagination">
+                                Page @(Model.PageCount < pagelist.PageNumber ? 0 : pagelist.PageNumber) of @pagelist.PageCount
+                                @Html.PagedListPager(pagelist, page => Url.Action("OrderMasterInformation_StatusCheck", new { StatusId = 1, page = page }))
+                            </div>*@
+
+                        @*<table id="table-force-off">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Order Type</th>
+                                        <th>Coustomer Name</th>
+                                        <th>Date</th>
+                                        <th>Bill No.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                        i = i + 1;
+                                            }
+                                            <td>@i</td>
+                                            <td>@item.OrderType</td>
+                                            <td>@item.CustomerDetail.CustomerName</td>
+                                            <td>@item.Date.Value</td>
+                                            <td>@item.BillNo</td>
+                                            <td>@Html.ActionLink("Edit", "OrderMasterView", new { id = item.OrderMaster_ID }) | @Html.ActionLink("Edit", "OrderMasterDetail", new { id = item.OrderMaster_ID }) | @Html.ActionLink("Delete", "OrderMasterDelete", new { id = item.OrderMaster_ID })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>*@
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

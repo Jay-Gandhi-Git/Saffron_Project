@@ -1,0 +1,74 @@
+﻿@model SaffronHotelAdminManagement_MVC4.Floor
+@{
+    ViewBag.Title = "FloorDelete";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+    
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Add Floor Here</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" action="#" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Floor Number</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            @*<span class="input-group-addon">
+                                                    <i class="fa></i>
+                                                </span>*@
+                                            <input type="text" name="floorno" class="form-control1 icon" value="@Html.DisplayFor(model=>model.FloorNo)" disabled required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Delete" class="frmButton" onclick="return confirm('Are Sure??')" />
+                                    <a href="@Url.Action("FloorInformation","Admin")"  class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

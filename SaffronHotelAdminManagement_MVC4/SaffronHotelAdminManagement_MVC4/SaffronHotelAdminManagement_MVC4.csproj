@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FB58C45-CC9F-4112-92C2-E561736A3085}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaffronHotelAdminManagement_MVC4</RootNamespace>
+    <AssemblyName>SaffronHotelAdminManagement_MVC4</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="clsMail.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="CustomerDetail.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Floor.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ItemCategory.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemMaster.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemUsedStock.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetailMaster.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderMaster.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseDetail.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseReturn.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseReturnDetail.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Saffron_DBEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Saffron_DBEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Saffron_DBEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Saffron_DBEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Saffron_DBEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TableMaster.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TableType.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\DS_Saffron.cs">
+      <DependentUpon>DS_Saffron.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Reports\DS_Saffron.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Saffron.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="WaiterAttendence.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WaiterMaster.cs">
+      <DependentUpon>Saffron_DBEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="charts.html" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="css\basictable.css" />
+    <Content Include="css\Bill.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\circles.css" />
+    <Content Include="css\component.css" />
+    <Content Include="css\export.css" />
+    <Content Include="css\flipclock.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\jQuery-plugin-progressbar1.css" />
+    <Content Include="css\monthly.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style_drop.css" />
+    <Content Include="css\style_grid.css" />
+    <Content Include="css\table-style.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\a1.jpg" />
+    <Content Include="images\a2.jpg" />
+    <Content Include="images\a3.jpg" />
+    <Content Include="images\a4.jpg" />
+    <Content Include="images\add_1.png" />
+    <Content Include="images\add_2.png" />
+    <Content Include="images\admin.jpg" />
+    <Content Include="images\Bil.png" />
+    <Content Include="images\bottom.jpg" />
+    <Content Include="images\jalu.jpg" />
+    <Content Include="images\overlay.png" />
+    <Content Include="images\pic.jpg" />
+    <Content Include="images\pic1.jpg" />
+    <Content Include="images\profile.jpg" />
+    <Content Include="images\profile_bg.jpg" />
+    <Content Include="images\progress.jpg" />
+    <Content Include="images\s.png" />
+    <Content Include="images\Saffron-animation.gif" />
+    <Content Include="images\Saffron_ICO.ico" />
+    <Content Include="js\amcharts.js" />
+    <Content Include="js\ASPSnippets_Pager.min.js" />
+    <Content Include="js\bars.js" />
+    <Content Include="js\bootstrap-3.1.1.min.js" />
+    <Content Include="js\Chart.min.js" />
+    <Content Include="js\circles.js" />
+    <Content Include="js\classie.js" />
+    <Content Include="js\contact_me.js" />
+    <Content Include="js\export.js" />
+    <Content Include="js\flipclock.js" />
+    <Content Include="js\gauge.js" />
+    <Content Include="js\gnmenu.js" />
+    <Content Include="js\index.js" />
+    <Content Include="js\jqBootstrapValidation.js" />
+    <Content Include="js\jquery-2.1.4.min.js" />
+    <Content Include="js\jQuery-plugin-progressbar.js" />
+    <Content Include="js\jquery.basictable.min.js" />
+    <Content Include="js\jquery.nicescroll.js" />
+    <Content Include="js\light.js" />
+    <Content Include="js\modernizr.custom.js" />
+    <Content Include="js\monthly.js" />
+    <Content Include="js\pie.js" />
+    <Content Include="js\prettymaps.js" />
+    <Content Include="js\radar.js" />
+    <Content Include="js\screenfull.js" />
+    <Content Include="js\scripts.js" />
+    <Content Include="js\serial.js" />
+    <Content Include="js\skycons.js" />
+    <Content Include="js\valida.2.1.6.min.js" />
+    <Content Include="js\validator.min.js" />
+    <Content Include="js\xy.js" />
+    <Content Include="SweetAlert\sweetalert.css" />
+    <Content Include="SweetAlert\sweetalert.min.js" />
+    <Content Include="SweetAlert\tempSweetAlert.js" />
+    <Content Include="Temp.html" />
+    <Content Include="Views\Admin\dsTableMasterReport.aspx" />
+    <Content Include="Views\Admin\DS_ItemList_Paritial.aspx" />
+    <Content Include="Views\Admin\ItemUsedStockInformation_Print_Partial.aspx" />
+    <Content Include="Views\Admin\OrderMasterInformation_Print_Partial.aspx" />
+    <Content Include="Views\Admin\OrderMasterInformation_Waiter_Print_Partial.aspx" />
+    <Content Include="Views\Admin\PurchaseInformation_Details_Print_Partial.aspx" />
+    <Content Include="Views\Admin\PurchaseInformation_Print_Partial.aspx" />
+    <Content Include="Views\Admin\TotalOrders_Print_Partial.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\Thumbs.db" />
+    <Content Include="js\js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\AdminChangePassword.cshtml" />
+    <Content Include="Views\Admin\AdminCreate.cshtml" />
+    <Content Include="Views\Admin\AdminDelete.cshtml" />
+    <Content Include="Views\Admin\AdminInformation.cshtml" />
+    <Content Include="Views\Admin\AdminView.cshtml" />
+    <Content Include="Views\Admin\BillGenerate.cshtml" />
+    <Content Include="Views\Admin\CustomerCreate.cshtml" />
+    <Content Include="Views\Admin\CustomerDelete.cshtml" />
+    <Content Include="Views\Admin\CustomerDetails.cshtml" />
+    <Content Include="Views\Admin\CustomerInformation.cshtml" />
+    <Content Include="Views\Admin\CustomerList.cshtml" />
+    <Content Include="Views\Admin\CustomerView.cshtml" />
+    <EntityDeploy Include="Saffron_DBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Saffron_DBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Saffron_DBEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Saffron_DBEntities.edmx</DependentUpon>
+      <LastGenOutput>Saffron_DBEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Saffron_DBEntities.edmx.diagram">
+      <DependentUpon>Saffron_DBEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Saffron_DBEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Saffron_DBEntities.edmx</DependentUpon>
+      <LastGenOutput>Saffron_DBEntities.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Admin\FloorCreate.cshtml" />
+    <Content Include="Views\Admin\FloorDelete.cshtml" />
+    <Content Include="Views\Admin\FloorInformation.cshtml" />
+    <Content Include="Views\Admin\FloorView.cshtml" />
+    <Content Include="Views\Admin\ForgotPassword.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ItemCategoryCreate.cshtml" />
+    <Content Include="Views\Admin\ItemCategoryDelete.cshtml" />
+    <Content Include="Views\Admin\ItemCategoryInformation.cshtml" />
+    <Content Include="Views\Admin\ItemCategoryView.cshtml" />
+    <Content Include="Views\Admin\ItemMasterCreate.cshtml" />
+    <Content Include="Views\Admin\ItemMasterDelete.cshtml" />
+    <Content Include="Views\Admin\ItemMasterInformation.cshtml" />
+    <Content Include="Views\Admin\ItemMasterView.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockCreate.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockDelete.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockInformation.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockView.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\OrderCreate.cshtml" />
+    <Content Include="Views\Admin\OrderDetailCreate.cshtml" />
+    <Content Include="Views\Admin\OrderMasterDeatil.cshtml" />
+    <Content Include="Views\Admin\OrderMasterInformation.cshtml" />
+    <Content Include="Views\Admin\OrderMasterInformation_Waiter.cshtml" />
+    <Content Include="Views\Admin\OurMenu.cshtml" />
+    <Content Include="Views\Admin\PaymentProcess.cshtml" />
+    <Content Include="Views\Admin\PaymentProcess_View.cshtml" />
+    <Content Include="Views\Admin\PurchaseCreate.cshtml" />
+    <Content Include="Views\Admin\PurchaseDelete.cshtml" />
+    <Content Include="Views\Admin\PurchaseDetails.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Details.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Details_View.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Vendor.cshtml" />
+    <Content Include="Views\Admin\PurchaseView.cshtml" />
+    <Content Include="Views\Admin\TableMasterCreate.cshtml" />
+    <Content Include="Views\Admin\TableMasterDelete.cshtml" />
+    <Content Include="Views\Admin\TableMasterInformation.cshtml" />
+    <Content Include="Views\Admin\TableMasterView.cshtml" />
+    <Content Include="Views\Admin\TableTypeCreate.cshtml" />
+    <Content Include="Views\Admin\TableTypeDelete.cshtml" />
+    <Content Include="Views\Admin\TableTypeInformation.cshtml" />
+    <Content Include="Views\Admin\TableTypeView.cshtml" />
+    <Content Include="Views\Admin\VendorCreate.cshtml" />
+    <Content Include="Views\Admin\VendorDelete.cshtml" />
+    <Content Include="Views\Admin\VendorInformation.cshtml" />
+    <Content Include="Views\Admin\VendorView.cshtml" />
+    <Content Include="Views\Admin\WaiterAttendenceCreate.cshtml" />
+    <Content Include="Views\Admin\WaiterCreate.cshtml" />
+    <Content Include="Views\Admin\WaiterDelete.cshtml" />
+    <Content Include="Views\Admin\WaiterInformation.cshtml" />
+    <Content Include="Views\Admin\WaiterView.cshtml" />
+    <Content Include="Views\Shared\Outer_LayoutPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\DS_Saffron.xsc">
+      <DependentUpon>DS_Saffron.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\Admin\dsItemList.cshtml" />
+    <Content Include="Views\Admin\RawMetirialsList.cshtml" />
+    <Content Include="Views\Admin\AssetsList.cshtml" />
+    <Content Include="Views\Admin\TotalCompleteOrders.cshtml" />
+    <Content Include="Views\Admin\TotalCencelOrders.cshtml" />
+    <Content Include="Views\Admin\TotalPendingOrders.cshtml" />
+    <Content Include="Views\Admin\TotalProcessOrders.cshtml" />
+    <Content Include="Views\Admin\OrderMasterInformation_Print.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockNotification.cshtml" />
+    <Content Include="Views\Admin\Notification.cshtml" />
+    <Content Include="Views\Admin\OrderMasterInformation_Waiter_Print.cshtml" />
+    <Content Include="Views\Admin\TotalOrders.cshtml" />
+    <Content Include="Views\Admin\PendingOrderNotification.cshtml" />
+    <Content Include="Views\Admin\ProcessOrderNotification.cshtml" />
+    <Content Include="Views\Admin\PaymentRemainNotification.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Return_Details.cshtml" />
+    <Content Include="Views\Admin\ItemUsedStockInformation_Print.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Print.cshtml" />
+    <Content Include="Views\Admin\PurchaseInformation_Details_Print.cshtml" />
+    <Content Include="Views\Admin\TotalOrders_Print.cshtml" />
+    <None Include="Views\Reports\DS_Saffron.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Saffron.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Reports\DS_Saffron.xss">
+      <DependentUpon>DS_Saffron.xsd</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\Item.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reports\rptTableMaster.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\ItemUsedStockInfromation_Print.rdlc" />
+    <EmbeddedResource Include="Views\Reports\OrderMasterInformation_Print.rdlc" />
+    <EmbeddedResource Include="Views\Reports\OrderMasterInformation_Waiter_Print.rdlc" />
+    <EmbeddedResource Include="Views\Reports\PurchaseInformation_Details_Print.rdlc" />
+    <EmbeddedResource Include="Views\Reports\PurchaseInformation_Print.rdlc" />
+    <EmbeddedResource Include="Views\Reports\TotalOrders_Print.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3412</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3412/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

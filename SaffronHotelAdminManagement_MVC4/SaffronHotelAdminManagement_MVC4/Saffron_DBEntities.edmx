@@ -1,0 +1,1241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Saffron_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CustomerDetails">
+          <Key>
+            <PropertyRef Name="Customer_ID" />
+          </Key>
+          <Property Name="Customer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="MobileNo" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="Floor_ID" />
+          </Key>
+          <Property Name="Floor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorNo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ItemCategory">
+          <Key>
+            <PropertyRef Name="ItemCategory_ID" />
+          </Key>
+          <Property Name="ItemCategory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategoryName" Type="nvarchar(max)" />
+          <Property Name="IsMenuItem" Type="bit" />
+          <Property Name="IsAssets" Type="bit" />
+          <Property Name="IsService" Type="bit" />
+          <Property Name="IsRawMetirial" Type="bit" />
+        </EntityType>
+        <EntityType Name="ItemMaster">
+          <Key>
+            <PropertyRef Name="ItemMaster_ID" />
+          </Key>
+          <Property Name="ItemMaster_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategory_ID" Type="int" />
+          <Property Name="ItemName" Type="nvarchar(max)" />
+          <Property Name="IsVeg" Type="bit" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="CGST" Type="float" />
+          <Property Name="SGST" Type="float" />
+          <Property Name="ReOrderLevel" Type="int" />
+          <Property Name="MinimumQuantatity" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemUsedStock">
+          <Key>
+            <PropertyRef Name="Stock_ID" />
+          </Key>
+          <Property Name="Stock_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemMaster_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderDetailMaster">
+          <Key>
+            <PropertyRef Name="OrderDetail_ID" />
+          </Key>
+          <Property Name="OrderDetail_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderMaster_ID" Type="int" />
+          <Property Name="ItemMaster_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="IsKOT" Type="bit" />
+          <Property Name="IsKOTProcess" Type="bit" />
+          <Property Name="IsKOTComplete" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderMaster">
+          <Key>
+            <PropertyRef Name="OrderMaster_ID" />
+          </Key>
+          <Property Name="OrderMaster_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderType" Type="nvarchar(max)" />
+          <Property Name="Table_ID" Type="int" />
+          <Property Name="WaiterMaster_Id" Type="int" />
+          <Property Name="Customer_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="IsComplete" Type="bit" />
+          <Property Name="IsCancle" Type="bit" />
+          <Property Name="IsProcess" Type="bit" />
+          <Property Name="BillNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Paymnet_Id" />
+          </Key>
+          <Property Name="Paymnet_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderMaster_Id" Type="int" />
+          <Property Name="PaymentMode" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="PayementDate" Type="date" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="Purchase_ID" />
+          </Key>
+          <Property Name="Purchase_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="BillNo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PurchaseDetails">
+          <Key>
+            <PropertyRef Name="PurchaseDetail_ID" />
+          </Key>
+          <Property Name="PurchaseDetail_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Purchase_ID" Type="int" />
+          <Property Name="ItemMaster_ID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Amount" Type="float" />
+        </EntityType>
+        <EntityType Name="PurchaseReturn">
+          <Key>
+            <PropertyRef Name="PurchaseReturn_ID" />
+          </Key>
+          <Property Name="PurchaseReturn_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Purchase_ID" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="PurchaseReturnDetail">
+          <Key>
+            <PropertyRef Name="PurchaseReturnDetail_ID" />
+          </Key>
+          <Property Name="PurchaseReturnDetail_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseReturn_ID" Type="int" />
+          <Property Name="ItemMaster_ID" Type="int" />
+          <Property Name="Quatntity" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TableMaster">
+          <Key>
+            <PropertyRef Name="Table_ID" />
+          </Key>
+          <Property Name="Table_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Floor_ID" Type="int" />
+          <Property Name="TableType_ID" Type="int" />
+          <Property Name="TableCapacity" Type="int" />
+          <Property Name="TableNo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TableType">
+          <Key>
+            <PropertyRef Name="TableType_ID" />
+          </Key>
+          <Property Name="TableType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Vendor_ID" />
+          </Key>
+          <Property Name="Vendor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorName" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="MobileNo" Type="nvarchar(max)" />
+          <Property Name="GstNo" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WaiterAttendence">
+          <Key>
+            <PropertyRef Name="WaiterAttendence_Id" />
+          </Key>
+          <Property Name="WaiterAttendence_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WaiterMaster_Id" Type="int" />
+          <Property Name="DateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WaiterMaster">
+          <Key>
+            <PropertyRef Name="WaiterMaster_Id" />
+          </Key>
+          <Property Name="WaiterMaster_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WaiterName" Type="nvarchar(max)" />
+          <Property Name="ContctNo" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="AdharCardNo" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_ItemMaster_ToTable_1">
+          <End Role="ItemCategory" Type="Self.ItemCategory" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategory">
+              <PropertyRef Name="ItemCategory_ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemmUsedStock_ToTable">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="ItemUsedStock" Type="Self.ItemUsedStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="ItemUsedStock">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailMaster_ToTable">
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="0..1" />
+          <End Role="OrderDetailMaster" Type="Self.OrderDetailMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Principal>
+            <Dependent Role="OrderDetailMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailMaster_ToTable_1">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="OrderDetailMaster" Type="Self.OrderDetailMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="OrderDetailMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaster_ToCustomerDetails">
+          <End Role="CustomerDetails" Type="Self.CustomerDetails" Multiplicity="0..1" />
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerDetails">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaster_ToTableMaster">
+          <End Role="TableMaster" Type="Self.TableMaster" Multiplicity="0..1" />
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMaster">
+              <PropertyRef Name="Table_ID" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="Table_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaster_ToWaiterMaster">
+          <End Role="WaiterMaster" Type="Self.WaiterMaster" Multiplicity="0..1" />
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaiterMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_OrderMaster">
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="OrderMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_ToTable">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="Vendor_ID" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Vendor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetails_ToTable">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseDetails" Type="Self.PurchaseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Purchase_ID" />
+            </Principal>
+            <Dependent Role="PurchaseDetails">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetails_ToTable_1">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="PurchaseDetails" Type="Self.PurchaseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="PurchaseDetails">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseReturn_ToPurchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseReturn" Type="Self.PurchaseReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Purchase_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturn">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="PurchaseReturnDetail" Type="Self.PurchaseReturnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturnDetail">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToPurchaseReturn">
+          <End Role="PurchaseReturn" Type="Self.PurchaseReturn" Multiplicity="0..1" />
+          <End Role="PurchaseReturnDetail" Type="Self.PurchaseReturnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseReturn">
+              <PropertyRef Name="PurchaseReturn_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturnDetail">
+              <PropertyRef Name="PurchaseReturn_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableMaster_ToTable">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+          <End Role="TableMaster" Type="Self.TableMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="Floor_ID" />
+            </Principal>
+            <Dependent Role="TableMaster">
+              <PropertyRef Name="Floor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableMaster_ToTable_1">
+          <End Role="TableType" Type="Self.TableType" Multiplicity="0..1" />
+          <End Role="TableMaster" Type="Self.TableMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableType">
+              <PropertyRef Name="TableType_ID" />
+            </Principal>
+            <Dependent Role="TableMaster">
+              <PropertyRef Name="TableType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaiterAttendence_WaiterMaster">
+          <End Role="WaiterMaster" Type="Self.WaiterMaster" Multiplicity="0..1" />
+          <End Role="WaiterAttendence" Type="Self.WaiterAttendence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaiterMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Principal>
+            <Dependent Role="WaiterAttendence">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Saffron_DBModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerDetails" EntityType="Self.CustomerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCategory" EntityType="Self.ItemCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemUsedStock" EntityType="Self.ItemUsedStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetailMaster" EntityType="Self.OrderDetailMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMaster" EntityType="Self.OrderMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseReturn" EntityType="Self.PurchaseReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseReturnDetail" EntityType="Self.PurchaseReturnDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableMaster" EntityType="Self.TableMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableType" EntityType="Self.TableType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaiterAttendence" EntityType="Self.WaiterAttendence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaiterMaster" EntityType="Self.WaiterMaster" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ItemMaster_ToTable_1" Association="Self.FK_ItemMaster_ToTable_1">
+            <End Role="ItemCategory" EntitySet="ItemCategory" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemmUsedStock_ToTable" Association="Self.FK_ItemmUsedStock_ToTable">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="ItemUsedStock" EntitySet="ItemUsedStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailMaster_ToTable" Association="Self.FK_OrderDetailMaster_ToTable">
+            <End Role="OrderMaster" EntitySet="OrderMaster" />
+            <End Role="OrderDetailMaster" EntitySet="OrderDetailMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailMaster_ToTable_1" Association="Self.FK_OrderDetailMaster_ToTable_1">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="OrderDetailMaster" EntitySet="OrderDetailMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaster_ToCustomerDetails" Association="Self.FK_OrderMaster_ToCustomerDetails">
+            <End Role="CustomerDetails" EntitySet="CustomerDetails" />
+            <End Role="OrderMaster" EntitySet="OrderMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaster_ToTableMaster" Association="Self.FK_OrderMaster_ToTableMaster">
+            <End Role="TableMaster" EntitySet="TableMaster" />
+            <End Role="OrderMaster" EntitySet="OrderMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaster_ToWaiterMaster" Association="Self.FK_OrderMaster_ToWaiterMaster">
+            <End Role="WaiterMaster" EntitySet="WaiterMaster" />
+            <End Role="OrderMaster" EntitySet="OrderMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_OrderMaster" Association="Self.FK_Payment_OrderMaster">
+            <End Role="OrderMaster" EntitySet="OrderMaster" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_ToTable" Association="Self.FK_Purchase_ToTable">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetails_ToTable" Association="Self.FK_PurchaseDetails_ToTable">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetails_ToTable_1" Association="Self.FK_PurchaseDetails_ToTable_1">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseReturn_ToPurchase" Association="Self.FK_PurchaseReturn_ToPurchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseReturn" EntitySet="PurchaseReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToItemMaster" Association="Self.FK_Table_ToItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="PurchaseReturnDetail" EntitySet="PurchaseReturnDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToPurchaseReturn" Association="Self.FK_Table_ToPurchaseReturn">
+            <End Role="PurchaseReturn" EntitySet="PurchaseReturn" />
+            <End Role="PurchaseReturnDetail" EntitySet="PurchaseReturnDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableMaster_ToTable" Association="Self.FK_TableMaster_ToTable">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="TableMaster" EntitySet="TableMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableMaster_ToTable_1" Association="Self.FK_TableMaster_ToTable_1">
+            <End Role="TableType" EntitySet="TableType" />
+            <End Role="TableMaster" EntitySet="TableMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaiterAttendence_WaiterMaster" Association="Self.FK_WaiterAttendence_WaiterMaster">
+            <End Role="WaiterMaster" EntitySet="WaiterMaster" />
+            <End Role="WaiterAttendence" EntitySet="WaiterAttendence" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Saffron_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CustomerDetail">
+          <Key>
+            <PropertyRef Name="Customer_ID" />
+          </Key>
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderMasters" Relationship="Self.FK_OrderMaster_ToCustomerDetails" FromRole="CustomerDetails" ToRole="OrderMaster" />
+        </EntityType>
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="Floor_ID" />
+          </Key>
+          <Property Name="Floor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TableMasters" Relationship="Saffron_DBModel.FK_TableMaster_ToTable" FromRole="Floor" ToRole="TableMaster" />
+        </EntityType>
+        <EntityType Name="ItemCategory">
+          <Key>
+            <PropertyRef Name="ItemCategory_ID" />
+          </Key>
+          <Property Name="ItemCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsMenuItem" Type="Boolean" />
+          <Property Name="IsAssets" Type="Boolean" />
+          <Property Name="IsService" Type="Boolean" />
+          <Property Name="IsRawMetirial" Type="Boolean" />
+          <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_ToTable_1" FromRole="ItemCategory" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="ItemMaster">
+          <Key>
+            <PropertyRef Name="ItemMaster_ID" />
+          </Key>
+          <Property Name="ItemMaster_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategory_ID" Type="Int32" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsVeg" Type="Boolean" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="CGST" Type="Double" />
+          <Property Name="SGST" Type="Double" />
+          <Property Name="ReOrderLevel" Type="Int32" />
+          <Property Name="MinimumQuantatity" Type="Int32" />
+          <NavigationProperty Name="ItemCategory" Relationship="Self.FK_ItemMaster_ToTable_1" FromRole="ItemMaster" ToRole="ItemCategory" />
+          <NavigationProperty Name="ItemUsedStocks" Relationship="Self.FK_ItemmUsedStock_ToTable" FromRole="ItemMaster" ToRole="ItemUsedStock" />
+          <NavigationProperty Name="OrderDetailMasters" Relationship="Self.FK_OrderDetailMaster_ToTable_1" FromRole="ItemMaster" ToRole="OrderDetailMaster" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK_PurchaseDetails_ToTable_1" FromRole="ItemMaster" ToRole="PurchaseDetails" />
+          <NavigationProperty Name="PurchaseReturnDetails" Relationship="Saffron_DBModel.FK_Table_ToItemMaster" FromRole="ItemMaster" ToRole="PurchaseReturnDetail" />
+        </EntityType>
+        <EntityType Name="ItemUsedStock">
+          <Key>
+            <PropertyRef Name="Stock_ID" />
+          </Key>
+          <Property Name="Stock_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemMaster_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemmUsedStock_ToTable" FromRole="ItemUsedStock" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="OrderDetailMaster">
+          <Key>
+            <PropertyRef Name="OrderDetail_ID" />
+          </Key>
+          <Property Name="OrderDetail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderMaster_ID" Type="Int32" />
+          <Property Name="ItemMaster_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="IsKOT" Type="Boolean" />
+          <Property Name="IsKOTProcess" Type="Boolean" />
+          <Property Name="IsKOTComplete" Type="Boolean" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_OrderDetailMaster_ToTable_1" FromRole="OrderDetailMaster" ToRole="ItemMaster" />
+          <NavigationProperty Name="OrderMaster" Relationship="Self.FK_OrderDetailMaster_ToTable" FromRole="OrderDetailMaster" ToRole="OrderMaster" />
+        </EntityType>
+        <EntityType Name="OrderMaster">
+          <Key>
+            <PropertyRef Name="OrderMaster_ID" />
+          </Key>
+          <Property Name="OrderMaster_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Table_ID" Type="Int32" />
+          <Property Name="WaiterMaster_Id" Type="Int32" />
+          <Property Name="Customer_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="IsCancle" Type="Boolean" />
+          <Property Name="IsProcess" Type="Boolean" />
+          <Property Name="BillNo" Type="Int32" />
+          <NavigationProperty Name="CustomerDetail" Relationship="Self.FK_OrderMaster_ToCustomerDetails" FromRole="OrderMaster" ToRole="CustomerDetails" />
+          <NavigationProperty Name="OrderDetailMasters" Relationship="Self.FK_OrderDetailMaster_ToTable" FromRole="OrderMaster" ToRole="OrderDetailMaster" />
+          <NavigationProperty Name="WaiterMaster" Relationship="Self.FK_OrderMaster_ToWaiterMaster" FromRole="OrderMaster" ToRole="WaiterMaster" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_OrderMaster" FromRole="OrderMaster" ToRole="Payment" />
+          <NavigationProperty Name="TableMaster" Relationship="Saffron_DBModel.FK_OrderMaster_ToTableMaster" FromRole="OrderMaster" ToRole="TableMaster" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Paymnet_Id" />
+          </Key>
+          <Property Name="Paymnet_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderMaster_Id" Type="Int32" />
+          <Property Name="PaymentMode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="PayementDate" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderMaster" Relationship="Self.FK_Payment_OrderMaster" FromRole="Payment" ToRole="OrderMaster" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="Purchase_ID" />
+          </Key>
+          <Property Name="Purchase_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="BillNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vendor" Relationship="Self.FK_Purchase_ToTable" FromRole="Purchase" ToRole="Vendor" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK_PurchaseDetails_ToTable" FromRole="Purchase" ToRole="PurchaseDetails" />
+          <NavigationProperty Name="PurchaseReturns" Relationship="Saffron_DBModel.FK_PurchaseReturn_ToPurchase" FromRole="Purchase" ToRole="PurchaseReturn" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="PurchaseDetail_ID" />
+          </Key>
+          <Property Name="PurchaseDetail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Purchase_ID" Type="Int32" />
+          <Property Name="ItemMaster_ID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Amount" Type="Double" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_PurchaseDetails_ToTable_1" FromRole="PurchaseDetails" ToRole="ItemMaster" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK_PurchaseDetails_ToTable" FromRole="PurchaseDetails" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="TableType">
+          <Key>
+            <PropertyRef Name="TableType_ID" />
+          </Key>
+          <Property Name="TableType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TableMasters" Relationship="Saffron_DBModel.FK_TableMaster_ToTable_1" FromRole="TableType" ToRole="TableMaster" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Vendor_ID" />
+          </Key>
+          <Property Name="Vendor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GstNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchase_ToTable" FromRole="Vendor" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="WaiterAttendence">
+          <Key>
+            <PropertyRef Name="WaiterAttendence_Id" />
+          </Key>
+          <Property Name="WaiterAttendence_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WaiterMaster_Id" Type="Int32" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="WaiterMaster" Relationship="Self.FK_WaiterAttendence_WaiterMaster" FromRole="WaiterAttendence" ToRole="WaiterMaster" />
+        </EntityType>
+        <EntityType Name="WaiterMaster">
+          <Key>
+            <PropertyRef Name="WaiterMaster_Id" />
+          </Key>
+          <Property Name="WaiterMaster_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WaiterName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContctNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdharCardNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderMasters" Relationship="Self.FK_OrderMaster_ToWaiterMaster" FromRole="WaiterMaster" ToRole="OrderMaster" />
+          <NavigationProperty Name="WaiterAttendences" Relationship="Self.FK_WaiterAttendence_WaiterMaster" FromRole="WaiterMaster" ToRole="WaiterAttendence" />
+        </EntityType>
+        <Association Name="FK_OrderMaster_ToCustomerDetails">
+          <End Role="CustomerDetails" Type="Self.CustomerDetail" Multiplicity="0..1" />
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerDetails">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_ToTable_1">
+          <End Role="ItemCategory" Type="Self.ItemCategory" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategory">
+              <PropertyRef Name="ItemCategory_ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemmUsedStock_ToTable">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="ItemUsedStock" Type="Self.ItemUsedStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="ItemUsedStock">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailMaster_ToTable_1">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="OrderDetailMaster" Type="Self.OrderDetailMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="OrderDetailMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetails_ToTable_1">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="PurchaseDetails" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="PurchaseDetails">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailMaster_ToTable">
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="0..1" />
+          <End Role="OrderDetailMaster" Type="Self.OrderDetailMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Principal>
+            <Dependent Role="OrderDetailMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaster_ToWaiterMaster">
+          <End Role="WaiterMaster" Type="Self.WaiterMaster" Multiplicity="0..1" />
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaiterMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_OrderMaster">
+          <End Role="OrderMaster" Type="Self.OrderMaster" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMaster">
+              <PropertyRef Name="OrderMaster_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="OrderMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchase_ToTable">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="Vendor_ID" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Vendor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetails_ToTable">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseDetails" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Purchase_ID" />
+            </Principal>
+            <Dependent Role="PurchaseDetails">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WaiterAttendence_WaiterMaster">
+          <End Role="WaiterMaster" Type="Self.WaiterMaster" Multiplicity="0..1" />
+          <End Role="WaiterAttendence" Type="Self.WaiterAttendence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WaiterMaster">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Principal>
+            <Dependent Role="WaiterAttendence">
+              <PropertyRef Name="WaiterMaster_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaffronModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="CustomerDetails" EntityType="Self.CustomerDetail" />
+          <EntitySet Name="Floors" EntityType="Self.Floor" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
+          <EntitySet Name="ItemMasters" EntityType="Self.ItemMaster" />
+          <EntitySet Name="ItemUsedStocks" EntityType="Self.ItemUsedStock" />
+          <EntitySet Name="OrderDetailMasters" EntityType="Self.OrderDetailMaster" />
+          <EntitySet Name="OrderMasters" EntityType="Self.OrderMaster" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+          <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetail" />
+          <EntitySet Name="TableTypes" EntityType="Self.TableType" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <EntitySet Name="WaiterAttendences" EntityType="Self.WaiterAttendence" />
+          <EntitySet Name="WaiterMasters" EntityType="Self.WaiterMaster" />
+          <AssociationSet Name="FK_OrderMaster_ToCustomerDetails" Association="Self.FK_OrderMaster_ToCustomerDetails">
+            <End Role="CustomerDetails" EntitySet="CustomerDetails" />
+            <End Role="OrderMaster" EntitySet="OrderMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_ToTable_1" Association="Self.FK_ItemMaster_ToTable_1">
+            <End Role="ItemCategory" EntitySet="ItemCategories" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemmUsedStock_ToTable" Association="Self.FK_ItemmUsedStock_ToTable">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="ItemUsedStock" EntitySet="ItemUsedStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailMaster_ToTable_1" Association="Self.FK_OrderDetailMaster_ToTable_1">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="OrderDetailMaster" EntitySet="OrderDetailMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetails_ToTable_1" Association="Self.FK_PurchaseDetails_ToTable_1">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailMaster_ToTable" Association="Self.FK_OrderDetailMaster_ToTable">
+            <End Role="OrderMaster" EntitySet="OrderMasters" />
+            <End Role="OrderDetailMaster" EntitySet="OrderDetailMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaster_ToWaiterMaster" Association="Self.FK_OrderMaster_ToWaiterMaster">
+            <End Role="WaiterMaster" EntitySet="WaiterMasters" />
+            <End Role="OrderMaster" EntitySet="OrderMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_OrderMaster" Association="Self.FK_Payment_OrderMaster">
+            <End Role="OrderMaster" EntitySet="OrderMasters" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchase_ToTable" Association="Self.FK_Purchase_ToTable">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetails_ToTable" Association="Self.FK_PurchaseDetails_ToTable">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WaiterAttendence_WaiterMaster" Association="Self.FK_WaiterAttendence_WaiterMaster">
+            <End Role="WaiterMaster" EntitySet="WaiterMasters" />
+            <End Role="WaiterAttendence" EntitySet="WaiterAttendences" />
+          </AssociationSet>
+          <EntitySet Name="TableMasters" EntityType="Saffron_DBModel.TableMaster" />
+          <AssociationSet Name="FK_TableMaster_ToTable" Association="Saffron_DBModel.FK_TableMaster_ToTable">
+            <End Role="Floor" EntitySet="Floors" />
+            <End Role="TableMaster" EntitySet="TableMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaster_ToTableMaster" Association="Saffron_DBModel.FK_OrderMaster_ToTableMaster">
+            <End Role="TableMaster" EntitySet="TableMasters" />
+            <End Role="OrderMaster" EntitySet="OrderMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableMaster_ToTable_1" Association="Saffron_DBModel.FK_TableMaster_ToTable_1">
+            <End Role="TableType" EntitySet="TableTypes" />
+            <End Role="TableMaster" EntitySet="TableMasters" />
+          </AssociationSet>
+          <EntitySet Name="PurchaseReturns" EntityType="Saffron_DBModel.PurchaseReturn" />
+          <AssociationSet Name="FK_PurchaseReturn_ToPurchase" Association="Saffron_DBModel.FK_PurchaseReturn_ToPurchase">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="PurchaseReturn" EntitySet="PurchaseReturns" />
+          </AssociationSet>
+          <EntitySet Name="PurchaseReturnDetails" EntityType="Saffron_DBModel.PurchaseReturnDetail" />
+          <AssociationSet Name="FK_Table_ToItemMaster" Association="Saffron_DBModel.FK_Table_ToItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="PurchaseReturnDetail" EntitySet="PurchaseReturnDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToPurchaseReturn" Association="Saffron_DBModel.FK_Table_ToPurchaseReturn">
+            <End Role="PurchaseReturn" EntitySet="PurchaseReturns" />
+            <End Role="PurchaseReturnDetail" EntitySet="PurchaseReturnDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TableMaster">
+          <Key>
+            <PropertyRef Name="Table_ID" />
+          </Key>
+          <Property Name="Table_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Floor_ID" Type="Int32" />
+          <Property Name="TableType_ID" Type="Int32" />
+          <Property Name="TableCapacity" Type="Int32" />
+          <Property Name="TableNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Floor" Relationship="Saffron_DBModel.FK_TableMaster_ToTable" FromRole="TableMaster" ToRole="Floor" />
+          <NavigationProperty Name="OrderMasters" Relationship="Saffron_DBModel.FK_OrderMaster_ToTableMaster" FromRole="TableMaster" ToRole="OrderMaster" />
+          <NavigationProperty Name="TableType" Relationship="Saffron_DBModel.FK_TableMaster_ToTable_1" FromRole="TableMaster" ToRole="TableType" />
+        </EntityType>
+        <Association Name="FK_TableMaster_ToTable">
+          <End Type="Saffron_DBModel.Floor" Role="Floor" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.TableMaster" Role="TableMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="Floor_ID" />
+            </Principal>
+            <Dependent Role="TableMaster">
+              <PropertyRef Name="Floor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaster_ToTableMaster">
+          <End Type="Saffron_DBModel.TableMaster" Role="TableMaster" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.OrderMaster" Role="OrderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMaster">
+              <PropertyRef Name="Table_ID" />
+            </Principal>
+            <Dependent Role="OrderMaster">
+              <PropertyRef Name="Table_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableMaster_ToTable_1">
+          <End Type="Saffron_DBModel.TableType" Role="TableType" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.TableMaster" Role="TableMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableType">
+              <PropertyRef Name="TableType_ID" />
+            </Principal>
+            <Dependent Role="TableMaster">
+              <PropertyRef Name="TableType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PurchaseReturn">
+          <Key>
+            <PropertyRef Name="PurchaseReturn_ID" />
+          </Key>
+          <Property Name="PurchaseReturn_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Purchase_ID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Purchase" Relationship="Saffron_DBModel.FK_PurchaseReturn_ToPurchase" FromRole="PurchaseReturn" ToRole="Purchase" />
+          <NavigationProperty Name="PurchaseReturnDetails" Relationship="Saffron_DBModel.FK_Table_ToPurchaseReturn" FromRole="PurchaseReturn" ToRole="PurchaseReturnDetail" />
+        </EntityType>
+        <Association Name="FK_PurchaseReturn_ToPurchase">
+          <End Type="Saffron_DBModel.Purchase" Role="Purchase" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.PurchaseReturn" Role="PurchaseReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Purchase_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturn">
+              <PropertyRef Name="Purchase_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PurchaseReturnDetail">
+          <Key>
+            <PropertyRef Name="PurchaseReturnDetail_ID" />
+          </Key>
+          <Property Name="PurchaseReturnDetail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseReturn_ID" Type="Int32" />
+          <Property Name="ItemMaster_ID" Type="Int32" />
+          <Property Name="Quatntity" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemMaster" Relationship="Saffron_DBModel.FK_Table_ToItemMaster" FromRole="PurchaseReturnDetail" ToRole="ItemMaster" />
+          <NavigationProperty Name="PurchaseReturn" Relationship="Saffron_DBModel.FK_Table_ToPurchaseReturn" FromRole="PurchaseReturnDetail" ToRole="PurchaseReturn" />
+        </EntityType>
+        <Association Name="FK_Table_ToItemMaster">
+          <End Type="Saffron_DBModel.ItemMaster" Role="ItemMaster" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.PurchaseReturnDetail" Role="PurchaseReturnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturnDetail">
+              <PropertyRef Name="ItemMaster_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToPurchaseReturn">
+          <End Type="Saffron_DBModel.PurchaseReturn" Role="PurchaseReturn" Multiplicity="0..1" />
+          <End Type="Saffron_DBModel.PurchaseReturnDetail" Role="PurchaseReturnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseReturn">
+              <PropertyRef Name="PurchaseReturn_ID" />
+            </Principal>
+            <Dependent Role="PurchaseReturnDetail">
+              <PropertyRef Name="PurchaseReturn_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Saffron_DBModelStoreContainer" CdmEntityContainer="SaffronModel">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="Saffron_DBModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerDetails">
+            <EntityTypeMapping TypeName="Saffron_DBModel.CustomerDetail">
+              <MappingFragment StoreEntitySet="CustomerDetails">
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Floors">
+            <EntityTypeMapping TypeName="Saffron_DBModel.Floor">
+              <MappingFragment StoreEntitySet="Floor">
+                <ScalarProperty Name="Floor_ID" ColumnName="Floor_ID" />
+                <ScalarProperty Name="FloorNo" ColumnName="FloorNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCategories">
+            <EntityTypeMapping TypeName="Saffron_DBModel.ItemCategory">
+              <MappingFragment StoreEntitySet="ItemCategory">
+                <ScalarProperty Name="ItemCategory_ID" ColumnName="ItemCategory_ID" />
+                <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+                <ScalarProperty Name="IsMenuItem" ColumnName="IsMenuItem" />
+                <ScalarProperty Name="IsAssets" ColumnName="IsAssets" />
+                <ScalarProperty Name="IsService" ColumnName="IsService" />
+                <ScalarProperty Name="IsRawMetirial" ColumnName="IsRawMetirial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemMasters">
+            <EntityTypeMapping TypeName="Saffron_DBModel.ItemMaster">
+              <MappingFragment StoreEntitySet="ItemMaster">
+                <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+                <ScalarProperty Name="ItemCategory_ID" ColumnName="ItemCategory_ID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="IsVeg" ColumnName="IsVeg" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="CGST" ColumnName="CGST" />
+                <ScalarProperty Name="SGST" ColumnName="SGST" />
+                <ScalarProperty Name="ReOrderLevel" ColumnName="ReOrderLevel" />
+                <ScalarProperty Name="MinimumQuantatity" ColumnName="MinimumQuantatity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemUsedStocks">
+            <EntityTypeMapping TypeName="Saffron_DBModel.ItemUsedStock">
+              <MappingFragment StoreEntitySet="ItemUsedStock">
+                <ScalarProperty Name="Stock_ID" ColumnName="Stock_ID" />
+                <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetailMasters">
+            <EntityTypeMapping TypeName="Saffron_DBModel.OrderDetailMaster">
+              <MappingFragment StoreEntitySet="OrderDetailMaster">
+                <ScalarProperty Name="OrderDetail_ID" ColumnName="OrderDetail_ID" />
+                <ScalarProperty Name="OrderMaster_ID" ColumnName="OrderMaster_ID" />
+                <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IsKOT" ColumnName="IsKOT" />
+                <ScalarProperty Name="IsKOTProcess" ColumnName="IsKOTProcess" />
+                <ScalarProperty Name="IsKOTComplete" ColumnName="IsKOTComplete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMasters">
+            <EntityTypeMapping TypeName="Saffron_DBModel.OrderMaster">
+              <MappingFragment StoreEntitySet="OrderMaster">
+                <ScalarProperty Name="OrderMaster_ID" ColumnName="OrderMaster_ID" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="Table_ID" ColumnName="Table_ID" />
+                <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="IsCancle" ColumnName="IsCancle" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Saffron_DBModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Paymnet_Id" ColumnName="Paymnet_Id" />
+                <ScalarProperty Name="OrderMaster_Id" ColumnName="OrderMaster_Id" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayementDate" ColumnName="PayementDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="Saffron_DBModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+                <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseDetails">
+            <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetails">
+                <ScalarProperty Name="PurchaseDetail_ID" ColumnName="PurchaseDetail_ID" />
+                <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+                <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableTypes">
+            <EntityTypeMapping TypeName="Saffron_DBModel.TableType">
+              <MappingFragment StoreEntitySet="TableType">
+                <ScalarProperty Name="TableType_ID" ColumnName="TableType_ID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="Saffron_DBModel.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="GstNo" ColumnName="GstNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaiterAttendences">
+            <EntityTypeMapping TypeName="Saffron_DBModel.WaiterAttendence">
+              <MappingFragment StoreEntitySet="WaiterAttendence">
+                <ScalarProperty Name="WaiterAttendence_Id" ColumnName="WaiterAttendence_Id" />
+                <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaiterMasters">
+            <EntityTypeMapping TypeName="Saffron_DBModel.WaiterMaster">
+              <MappingFragment StoreEntitySet="WaiterMaster">
+                <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+                <ScalarProperty Name="WaiterName" ColumnName="WaiterName" />
+                <ScalarProperty Name="ContctNo" ColumnName="ContctNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AdharCardNo" ColumnName="AdharCardNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableMasters">
+            <EntityTypeMapping TypeName="Saffron_DBModel.TableMaster">
+              <MappingFragment StoreEntitySet="TableMaster">
+                <ScalarProperty Name="TableNo" ColumnName="TableNo" />
+                <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+                <ScalarProperty Name="TableType_ID" ColumnName="TableType_ID" />
+                <ScalarProperty Name="Floor_ID" ColumnName="Floor_ID" />
+                <ScalarProperty Name="Table_ID" ColumnName="Table_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseReturns">
+            <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseReturn">
+              <MappingFragment StoreEntitySet="PurchaseReturn">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+                <ScalarProperty Name="PurchaseReturn_ID" ColumnName="PurchaseReturn_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseReturnDetails">
+            <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseReturnDetail">
+              <MappingFragment StoreEntitySet="PurchaseReturnDetail">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Quatntity" ColumnName="Quatntity" />
+                <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+                <ScalarProperty Name="PurchaseReturn_ID" ColumnName="PurchaseReturn_ID" />
+                <ScalarProperty Name="PurchaseReturnDetail_ID" ColumnName="PurchaseReturnDetail_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,172 @@
+﻿@model SaffronHotelAdminManagement_MVC4.OrderMaster
+@{
+    ViewBag.Title = "OrderMasterDeatil";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+       
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Order Detail </h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Bill No.</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="text" name="remark" value="@((Model.BillNo!=null)?Model.BillNo.Value:0)" class="form-control1 icon"readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Customer Name</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" name="cname" value="@((Model.CustomerDetail.CustomerName!=null)?Model.CustomerDetail.CustomerName:"-")" class="form-control1 icon" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Order Type</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <input type="text" name="remark" value="@((Model.OrderType!=null)?Model.OrderType:"-")" class="form-control1 icon" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Table No.</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <input type="text" name="remark" value="@(((Model.Table_ID!=null)?Model.TableMaster.TableNo:"-"))" class="form-control1 icon" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="date" name="date" value="@((Model.Date.Value!=null)?Model.Date.Value.ToString("yyyy-MM-dd"):"-")" class="form-control1 icon" required="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-offset-2">
+                                    @*<input type="submit" value="Pay" class="frmButton" />*@
+                                    <a href="@Url.Action("OrderMasterInformation", "Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                            <hr />
+
+
+                            <div class="table-responsive">
+                                <h3 class="w3_inner_tittle two">Order Item List</h3>
+                                <div class="col-sm-offset-1">
+                                    @*<input type="submit" value="Pay" class="frmButton" />*@
+                                    <a href="@Url.Action("OrderDetailCreate", "Admin", new { id = Model.OrderMaster_ID })" class="btn btn-success">
+                                        Add New Item
+                                    </a>
+                                </div>
+                                <table id="table-force-off">
+                                    <thead>
+                                        <tr>
+                                            <th>SR.NO</th>
+                                            <th>Item</th>
+                                            <th>Qunatatity</th>
+                                            <th>Rate</th>
+                                            <th>Amount</th>
+                                            @*<th>Action</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int i = 0;
+                                        }
+                                        @foreach (var item in Model.OrderDetailMasters.ToList())
+                                        {
+                                            <tr>
+                                                @{
+                                            i = i + 1;
+                                                }
+                                                <td>@i</td>
+                                                <td>@item.ItemMaster.ItemName</td>
+                                                <td>@item.Quantity</td>
+                                                <td>₹@item.Rate/-</td>
+                                                <td>₹@item.Amount/-</td>
+                                                @*<td><a href="@Url.Action("OrderDetailsDeleteOrderItem", "Admin", new { temp = item.OrderDetail_ID })" onclick="return confirm('Are youu sure??')">Delete</a> | @Html.ActionLink("+", "OrderDetailsAddQuantity", new { temp = item.OrderDetail_ID }) | <a href="@Url.Action("OrderDetailsSingleDeleteQuantity", "Admin", new { temp = item.OrderDetail_ID })">-</a></td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+            </div>
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+    </div>
+    <!-- //inner_content-->
+</div>
+

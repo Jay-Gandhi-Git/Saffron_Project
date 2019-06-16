@@ -1,0 +1,211 @@
+﻿@model SaffronHotelAdminManagement_MVC4.OrderMaster
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BillGenerate</title>
+    <link href="~/css/Bill.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+
+
+        <div class="invoice-box">
+            <span>
+                Hotel Saffron |
+                N.H.08,Thala |
+                Ta.Chikhli,Dist.Navsari |
+                Mob No:9033344995
+            </span>
+            <div class="total1">
+
+            </div>
+            <table cellpadding="0" cellspacing="0">
+
+                <tr class="top">
+
+                    <td colspan="6">
+                        <table>
+
+                            <tr>
+
+                                <td>
+                                    <b>
+                                        Bill No.&nbsp;: @Model.BillNo |
+                                        Table No: @if (Model.Table_ID != null)
+                                        {@Model.TableMaster.TableNo} |
+                                        <span>Date: @Model.Date.Value.ToString("dd-MM-yyyy")</span>
+                                    </b><br />
+                                    <b>
+                                        Customer Name :
+                                        @Model.CustomerDetail.CustomerName
+                                    </b>
+                                </td>
+                                @*<td>
+                                        Customer Name:
+                                        @Model.CustomerDetail.CustomerName
+                                    </td>*@
+                                <td class="title" align="right">
+                                    <img src="~/images/Bil.png" style="margin-right:-30px;width:120px;height:90px;">
+                                </td>
+                            </tr>
+                            @*<tr>
+                                    <td>
+                                        @*<hr />
+                                            Hotel Saffron |
+                                            N.H.08,Thala|
+                                            Ta.Chikhli,Dist.Navsari |
+                                            Mob No:9033344995<hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            Bill No. @Model.BillNo |
+                                            Table No: @if (Model.Table_ID != null)
+                                            {@Model.TableMaster.TableNo} |
+                                            <span>Date: @Model.Date.Value.ToString("dd-MM-yyyy")</span>
+                                        </b>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Customer Name<br />
+                                        @Model.CustomerDetail.CustomerName
+                                    </td>
+                                </tr>*@
+                        </table>
+                    </td>
+                </tr>
+
+                @* <tr class="information">
+                    <td colspan="6">
+                        <table>
+                            <tr>
+                                <td>
+                                    Hotel Saffron<br>
+                                    N.H.08,Thala,<br>
+                                    Ta.Chikhli,Dist.Navsari<br>
+                                    Mob No:9033344995
+                                </td>
+
+                                <td>
+                                    Customer Det.<br />
+                                    @Model.CustomerDetail.CustomerName<br>
+                                    @Model.CustomerDetail.MobileNo<br>
+                                    @Model.CustomerDetail.Email
+                                </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>*@
+
+
+                <tr class="total1">
+                    <td class="total1" style="text-align:center">
+                        Item
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        Quantity
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        Rate
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        Taxable  Amount
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        CGST Amount
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        SGST Amount
+                    </td>
+                    <td class="total1" style="text-align:center">
+                        Amount
+                    </td>
+                </tr>
+
+                @foreach (var item in Model.OrderDetailMasters.ToList())
+                {
+                    <tr class="item">
+                        <td style="text-align:center">
+                            @item.ItemMaster.ItemName
+                        </td>
+
+                        <td style="text-align:center">
+                            @item.Quantity
+                        </td>
+                        <td style="text-align:center">
+                            @((item.Rate / ((100 + item.ItemMaster.CGST + item.ItemMaster.SGST) / 100)).Value.ToString("F2"))
+                        </td>
+                        <td style="text-align:center">
+                            @(((item.Rate / ((100 + item.ItemMaster.CGST + item.ItemMaster.SGST) / 100)) * item.Quantity).Value.ToString("F2"))
+                        </td>
+                        <td style="text-align:center">
+                            @((((item.Rate / ((100 + item.ItemMaster.CGST + item.ItemMaster.SGST) / 100)) * item.Quantity) * item.ItemMaster.CGST.Value / 100).Value.ToString("F2"))
+                        </td>
+                        <td style="text-align:center">
+                            @((((item.Rate / ((100 + item.ItemMaster.CGST + item.ItemMaster.SGST) / 100)) * item.Quantity) * (item.ItemMaster.SGST.Value / 100)).Value.ToString("F2"))
+                        </td>
+                        <td style="text-align:center">
+                            @item.Amount
+                        </td>
+                    </tr>
+                }
+
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="total1" style="text-align:center"> Total:</td>
+                    <td class="total1" style="text-align:right">
+                        ₹@Model.OrderDetailMasters.Sum(a => (a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100))).Value.ToString("F2")/-
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="total1" style="text-align:center"> C GST:</td>
+                    <td class="total1" style="text-align:right">
+                        ₹@Model.OrderDetailMasters.Sum(a => ((a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100)) * a.Quantity) * (a.ItemMaster.CGST.Value / 100)).Value.ToString("F2")/-
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="total1" style="text-align:center"> S GST:</td>
+                    <td class="total1" style="text-align:right">
+                        ₹@Model.OrderDetailMasters.Sum(a => ((a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100)) * a.Quantity) * (a.ItemMaster.SGST.Value / 100)).Value.ToString("F2")/-
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="total1" style="text-align:center"> Net Amount:</td>
+                    <td class="total1" style="text-align:right">
+                        ₹@Model.OrderDetailMasters.Sum(a => ((a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100)) * a.Quantity) + (((a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100)) * a.Quantity) * (a.ItemMaster.CGST.Value / 100)) + (((a.Rate / ((100 + a.ItemMaster.CGST + a.ItemMaster.SGST) / 100)) * a.Quantity) * (a.ItemMaster.SGST.Value / 100))).Value.ToString("F2")/-
+                    </td>
+                </tr>
+            </table>
+            @*<hr />
+                Hotel Saffron |
+                N.H.08,Thala|
+                Ta.Chikhli,Dist.Navsari |
+                Mob No:9033344995<hr />*@
+        </div>
+        <div>
+            <a href="@Url.Action("OrderMasterInformation", "Admin")" style="color:black;text-decoration:none;margin-left:350px;">OrderInfo</a>
+        </div>
+    </div>
+</body>
+</html>

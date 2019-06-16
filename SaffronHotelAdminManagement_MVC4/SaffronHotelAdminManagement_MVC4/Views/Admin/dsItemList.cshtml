@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "dsItemList";
+    //Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<div>
+    @Html.Partial("DS_ItemList_Paritial")
+</div>
+
+
+

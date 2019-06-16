@@ -1,0 +1,225 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SaffronHotelAdminManagement_MVC4.Purchase>
+@{
+    ViewBag.Title = "PurchaseInformation_Vendor";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <div class="clearfix"></div>
+    <div class="inner_content">
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+                    <a href="@Url.Action("PurchaseCreate", "Admin")" title="Add new purchase">
+                            <img src="~/images/add_2.png" />
+                        </a>
+                    <h3 class="w3_inner_tittle two">Purchase Information</h3>
+                    <label>Vendor Name</label>
+                    @{
+                        var VendorList = ViewBag.VendorList as List<SaffronHotelAdminManagement_MVC4.Vendor>;
+                    }
+                    <select id="Vendor_Id" name="Vendor_Id" class="form-control1 icon" style="width:200px;">
+                        @foreach (var item in VendorList)
+                        {
+                            <option value="@item.Vendor_ID">@item.VendorName - @item.City</option>
+                        }
+                    </select>&nbsp;&nbsp;&nbsp;
+                    <label>Start Date</label>
+                    <input type="date" class="form-control1 icon" style="width:150px;" onchange="getRecord(1);" name="stDate" id="stDate" value="@ViewBag.Date" />&nbsp;&nbsp;&nbsp;
+                    <label>End Date</label>
+                    <input type="date" class="form-control1 icon" style="width:150px;" onchange="getRecord(1);" name="enDate" id="enDate" value="@ViewBag.Date" />
+                    @if (ViewBag.errorMsg != null)
+                    {
+                        <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                    }
+                    <script type="text/javascript">
+                        $(function () {
+                            getRecord(1)
+                        });
+                        $("body").on("click", ".page", function () {
+                            getRecord(parseInt($(this).attr('page')));
+                        });
+                        $("#ItemCategory_Id").change(function () {
+                            getRecord(1)
+                        });
+                        function getRecord(page) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Admin/PurchaseInformation_VendorNameWise_Bind",
+                                data: '{Vendor_Id:"' + $("#Vendor_Id").val() + '",stDate:"' + $("#stDate").val() + '",enDate:"' + $("#enDate").val() + '",page:"' + page + '"}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: OnSuccess,
+                                failure: function (response) {
+                                    alert('hi');
+                                    alert(response.responseText);
+                                },
+                                error: function (response) {
+                                    alert('hello');
+                                    alert(response.responseText);
+                                }
+                            });
+                            function OnSuccess(response) {
+                                var model = response;
+
+                                var row = $("#BlanckRow tr:first-child").removeAttr("style").clone(true);
+                                $("#table-force-off tr").not($("#table-force-off tr:first-child")).remove();
+                                var sr = 0;
+                                for (var i = 0; i < model.length; i++) {
+                                    var s = model[i];
+
+                                    $("td", row).eq(0).html(++sr);
+                                    $("td", row).eq(1).html(s.BillNo);
+                                    $("td", row).eq(2).html(s.ItemName);
+                                    $("td", row).eq(3).html(s.date);
+                                    $("td", row).eq(4).html("₹" + s.Amount + "/-");
+                                    @*  var editLink = '@Url.Action("ItemMasterView", "Admin", new { id = "-1" })';
+                                    editLink = editLink.replace("-1", s.ItemMaster_ID);
+                                    var deleteLink = '@Url.Action("ItemMasterDelete", "Admin", new { id = "-1" })';
+                                    deleteList = deleteLink.replace("-1", s.ItemMaster_ID);*@
+
+                                    var DetailLink = ' @Url.Action("", "Admin", new { id = "-1" })';
+                                    DetailLink = DetailLink.replace("-1", s.Purchase_ID);
+
+                                    $("td", row).eq(5).html("<a href='" + DetailLink + "' target='_blank' class='btn btn-success'>Detail</a>");
+
+                                    //$("td", row).eq(5).html("<a href='" + editLink + "'>Edit</a> | <a href='" + deleteList + "'>Delete</a>");
+                                    $("#table-force-off").append(row);
+                                    row = $("#BlanckRow tr:first-child").clone(true);
+
+                                    $(".pagination").ASPSnippets_Pager({
+                                        ActiveCssClass: "current",
+                                        PagerCssClass: "pager",
+                                        PageIndex: s.PageIndex,
+                                        PageSize: s.PageSize,
+                                        RecordCount: s.RecordCount
+                                    });
+
+                                }
+                            }
+                        }
+                    </script>
+
+                    <div class="table-responsive">
+                        <table id="table-force-off">
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Bill No.</th>
+                                <th>Item Name</th>
+                                <th>Date</th>
+                                <th>Net Amount</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Course</td>
+
+                            </tr>
+                        </table>
+
+                        <table id="BlanckRow" style="display:none">
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>Name</td>
+                                <td>Course</td>
+
+                            </tr>
+                        </table>
+                        <ul class="pagination"></ul>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/jquery-2.1.4.min.js"></script>
+<script src="~/js/modernizr.custom.js"></script>
+
+<script src="~/js/classie.js"></script>
+<script src="~/js/gnmenu.js"></script>
+<script>
+    new gnMenu(document.getElementById('gn-menu'));
+</script>
+<!-- tables -->
+
+<script type="text/javascript" src="~/js/jquery.basictable.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table').basictable();
+
+        $('#table-breakpoint').basictable({
+            breakpoint: 768
+        });
+
+        $('#table-swap-axis').basictable({
+            swapAxis: true
+        });
+
+        $('#table-force-off').basictable({
+            forceResponsive: false
+        });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+
+        $('#table-two-axis').basictable();
+
+        $('#table-max-height').basictable({
+            tableWrapper: true
+        });
+    });
+</script>
+<!-- //js -->
+<script src="~/js/screenfull.js"></script>
+<script>
+    $(function () {
+        $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+        if (!screenfull.enabled) {
+            return false;
+        }
+
+
+
+        $('#toggle').click(function () {
+            screenfull.toggle($('#container')[0]);
+        });
+    });
+</script>
+<script src="~/js/jquery.nicescroll.js"></script>
+<script src="~/js/scripts.js"></script>
+
+<script type="text/javascript" src="~/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/js/bootstrap-3.1.1.min.js"></script>
+

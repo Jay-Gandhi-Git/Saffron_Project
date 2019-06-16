@@ -1,0 +1,43 @@
+﻿<div class="table-responsive" style="overflow:auto;height:400px;">
+
+
+
+
+    <table>
+        <tr>
+            <th>OrderStatus</th>
+            <th>Costomer Name</th>
+            <th>Mobile Number</th>
+            <th>Date</th>
+            <th>Bill No.</th>
+            <th>Total Amount</th>
+            <th>Paid Amount</th>
+            <th>Remain Amount</th>
+        </tr>
+        @{
+
+            int sr = 0;
+
+            var temp = ViewData["PaymentRemaingOfOrderNotification"] as IEnumerable<SaffronHotelAdminManagement_MVC4.Payment>;
+            foreach (var item in temp)
+            {
+                <tr>
+                    <td>@(item.OrderMaster.IsComplete != null? "Complete":"-")</td>
+                    <td>@item.OrderMaster.CustomerDetail.CustomerName</td>
+                    <td>@item.OrderMaster.CustomerDetail.MobileNo</td>
+                    <td>@item.OrderMaster.Date.Value.ToString("dd-MM-yyyy")</td>
+                    <td>@item.OrderMaster.BillNo</td>
+                    <td>₹@item.OrderMaster.OrderDetailMasters.Sum(am => am.Amount.Value)/-</td>
+                    <td>₹@item.OrderMaster.Payments.Sum(am => am.Amount)/-</td>
+                    <td>₹@(item.OrderMaster.OrderDetailMasters.Sum(am => am.Amount.Value)-item.OrderMaster.Payments.Sum(am => am.Amount))/-</td>
+                </tr>
+            }
+        }
+
+    </table>
+
+
+
+
+
+</div>

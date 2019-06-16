@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "TableMasterCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+<script>
+    function validateNumberSize() {
+        var inputtxt = document.getElementById('tableNo').value;
+        var tblCapacity = document.getElementById('tblCapacity').value;
+        var numbers = /^[0-9]+$/;
+        if (inputtxt.match(numbers)) {
+            if (inputtxt >= 1 && inputtxt <= 20 && tblCapacity>=1 && tblCapacity<=12) {
+                return true;
+            }
+            else {
+                alert('Table Number must be less than 20 | Table capacity must be less than 12');
+                return false;
+            }
+        }
+        else {
+            alert('Please enter valid value');
+            return false;
+        }
+    }
+</script>
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+       
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Create New Table </h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Table Type</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <select class="form-control1 icon " name="tableType_Id">
+                                                @{
+                                                    var TableTypeList = ViewBag.TableType as List<SaffronHotelAdminManagement_MVC4.TableType>;
+                                                }
+                                                @foreach (var item in TableTypeList)
+                                                {
+                                                    <option value="@item.TableType_ID">@item.TableName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Floor</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <select class="form-control1 icon" name="floor_Id">
+                                                @{
+                                                    var FloorList = ViewBag.Floor as List<SaffronHotelAdminManagement_MVC4.Floor>;
+                                                    }
+                                                @foreach (var item in FloorList)
+                                                {
+                                                    <option value="@item.Floor_ID">@item.FloorNo</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Table Capacity</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <input type="text" name="tableCapacity" id="tblCapacity" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Table No</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-table"></i>
+                                            </span>
+                                            <input type="text" name="tableNo" id="tableNo" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Save" class="frmButton" onclick="return validateNumberSize()" />
+                                    <a href="@Url.Action("TableMasterInformation","Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+            </div>
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+    </div>
+    <!-- //inner_content-->
+</div>

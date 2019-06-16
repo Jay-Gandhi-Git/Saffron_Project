@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "ItemUsedStockCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+      
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Item Used Stock Create</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Select item category</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <select name="ItemCategoryId" id="ItemCategoryId" class="form-control1 icon">
+                                                @{
+                                                    var ItemCategoryList = ViewBag.ItemCategoryName as List<SaffronHotelAdminManagement_MVC4.ItemCategory>;
+                                                }
+                                                @foreach (var item in ItemCategoryList)
+                                                {
+                                                    <option value="@item.ItemCategory_ID">@item.ItemCategoryName</option>
+                                                }
+                                            </select>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    getRecord();
+                                                });
+                                                $("#ItemCategoryId").change(function () {
+                                                    getRecord();
+                                                });
+
+                                                function getRecord() {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "/Admin/ItemUsedStockView_ItemBind",
+                                                        data: '{ItemCategory_Id:"' + $("#ItemCategoryId").val() + '"}',
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        success: OnSuccess,
+                                                        failure: function (response) {
+                                                            
+                                                            alert(response.responseText);
+                                                        },
+                                                        error: function (response) {
+                                                            alert('Failer');
+                                                            alert(response.responseText);
+                                                        }
+                                                    });
+                                                }
+                                                function OnSuccess(response) {
+                                                    var model = response;
+                                                    $("#ItemMasterId").html("");
+                                                    for (var i = 0; i < model.length; i++) {
+                                                        var s = model[i];
+                                                        $("#ItemMasterId").append($('<option></option>').val(s.ItemMaster_ID).html(s.ItemName));
+                                                    }
+                                                    getRate();
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Item Name</label>
+                                    <div class="col-md-4">
+                                        <div id="hello" class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <select name="ItemMasterId" id="ItemMasterId" class="form-control1 icon" onchange="getRate();">
+                                                @*@{
+                                                        var ItemList = ViewBag.ItemName as List<SaffronHotelAdminManagement_MVC4.ItemMaster>;
+                                                    }
+                                                    @foreach (var item in ItemList)
+                                                    {
+                                                        <option value="@item.ItemMaster_ID">@item.ItemName</option>
+                                                    }*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Qunatatity</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="number" value="1"  id="qty" name="qty" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="date" value="@ViewBag.Date" id="date" name="date" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Save" class="frmButton" />
+                                    <a href="@Url.Action("ItemUsedStockInformation", "Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                               
+                            </form>
+
+                            
+                        </div>
+
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+
+            </div>
+
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+
+
+
+
+
+    </div>
+</div>
+

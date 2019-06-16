@@ -1,0 +1,269 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<SaffronHotelAdminManagement_MVC4.OrderMaster>
+@{
+    ViewBag.Title = "TotalOrders";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/table-style.css" />
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+
+<div class="wthree_agile_admin_info" style="margin-top:65px;">
+    <div class="clearfix"></div>
+    <div class="inner_content">
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Tables</h2>*@
+            <div class="agile-tables">
+                <div class="w3l-table-info agile_info_shadow">
+                    @* <a href="@Url.Action("OrderMasterCreate", "Admin")" title="Create New Order">
+                             Create Table Type
+                            <img src="~/images/add_2.png" />
+                        </a>*@
+
+                    <h3 class="w3_inner_tittle two">Total Order List</h3>
+                    <form class="form-horizontal" method="post">
+
+                        <label>Select Order Status</label>
+                        <select id="status_order" name="status_order" class="form-control1 icon" style="width:100px;">
+                            <option value="0">Panding Order</option>
+                            <option value="1">Process</option>
+                            <option value="2">Complete</option>
+                            <option value="3">Cancel</option>
+                        </select>&nbsp;&nbsp;&nbsp;
+                        
+                        @*<input type="submit" value="Print" class="btn btn-info btn-lg" />*@
+                        <a id="print" href="@Url.Action("TotalOrders_Print", "Admin")" target="_blank" class="frmButton btn-lg">
+                            <span class="glyphicon glyphicon-print"></span> Print
+                        </a>
+                    </form>
+                    @if (ViewBag.errorMsg != null)
+                    {
+                        <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                    }
+                    <script type="text/javascript">
+                        $(function () {
+                            getRecord(1)
+                        });
+                        $("body").on("click", ".page", function () {
+                            getRecord(parseInt($(this).attr('page')));
+                        });
+                        $("#status_order").change(function () {
+                            getRecord(1)
+                        });
+                        
+                        function getRecord(page) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Admin/TotalOrderFilter",
+                                data: '{StatusId:"' + $("#status_order").val() + '",page:"' + page + '"}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: OnSuccess,
+                                failure: function (response) {
+                                    alert('Fail');
+                                    alert(response.responseText);
+                                },
+                                error: function (response) {
+                                    alert('Error');
+                                    alert(response.responseText);
+                                }
+                            });
+                        }
+
+                        function OnSuccess(response) {
+                            var model = response;
+
+                            var row = $("#BlanckRow tr:first-child").removeAttr("style").clone(true);
+                            $("#table-force-off tr").not($("#table-force-off tr:first-child")).remove();
+                            var sr = 0;
+                            if (model.length > 0) {
+                                for (var i = 0; i < model.length; i++) {
+                                    var s = model[i];
+
+                                    $("td", row).eq(0).html(++sr);
+                                    $("td", row).eq(1).html(s.OrderType);
+                                    $("td", row).eq(2).html(s.TableNo);
+                                    $("td", row).eq(3).html(s.CustomerName);
+                                    $("td", row).eq(4).html(s.Date);
+                                    $("td", row).eq(5).html(s.BillNo);
+                                    $("td", row).eq(6).html(s.TotalAmount);
+                                    $("td", row).eq(7).html(s.TotalItem);
+                                   
+                                    $("#table-force-off").append(row);
+                                    row = $("#BlanckRow tr:first-child").clone(true);
+
+                                    $(".pagination").ASPSnippets_Pager({
+                                        ActiveCssClass: "current",
+                                        PagerCssClass: "pager",
+                                        PageIndex: s.PageIndex,
+                                        PageSize: s.PageSize,
+                                        RecordCount: s.RecordCount
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                $("td", row).eq(4).html('<b>No data to dispaly</b>');
+                                $("#table-force-off").append(row);
+                            }
+                        }
+                    </script>
+                    <div class="table-responsive">
+                        <table id="table-force-off">
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Order Type</th>
+                                <th>Table No.</th>
+                                <th>Coustomer Name</th>
+                                <th>Date</th>
+                                <th>Bill No.</th>
+                                <th>Total Amount</th>
+                                <th>Total Item</th>
+                            </tr>
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>Course</td>
+                                <td>Teacher</td>
+
+                            </tr>
+                        </table>
+
+                        <table id="BlanckRow" style="display:none">
+                            <tr style="display:none">
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+
+                            </tr>
+                        </table>
+                        <ul class="pagination"></ul>
+                        @*<div class="pagination">
+                                Page @(Model.PageCount < pagelist.PageNumber ? 0 : pagelist.PageNumber) of @pagelist.PageCount
+                                @Html.PagedListPager(pagelist, page => Url.Action("OrderMasterInformation_StatusCheck", new { StatusId = 1, page = page }))
+                            </div>*@
+
+                        @*<table id="table-force-off">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Order Type</th>
+                                        <th>Coustomer Name</th>
+                                        <th>Date</th>
+                                        <th>Bill No.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @{
+                                        i = i + 1;
+                                            }
+                                            <td>@i</td>
+                                            <td>@item.OrderType</td>
+                                            <td>@item.CustomerDetail.CustomerName</td>
+                                            <td>@item.Date.Value</td>
+                                            <td>@item.BillNo</td>
+                                            <td>@Html.ActionLink("Edit", "OrderMasterView", new { id = item.OrderMaster_ID }) | @Html.ActionLink("Edit", "OrderMasterDetail", new { id = item.OrderMaster_ID }) | @Html.ActionLink("Delete", "OrderMasterDelete", new { id = item.OrderMaster_ID })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>*@
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/jquery-2.1.4.min.js"></script>
+<script src="~/js/modernizr.custom.js"></script>
+
+<script src="~/js/classie.js"></script>
+<script src="~/js/gnmenu.js"></script>
+<script>
+    new gnMenu(document.getElementById('gn-menu'));
+</script>
+<!-- tables -->
+
+<script type="text/javascript" src="~/js/jquery.basictable.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table').basictable();
+
+        $('#table-breakpoint').basictable({
+            breakpoint: 768
+        });
+
+        $('#table-swap-axis').basictable({
+            swapAxis: true
+        });
+
+        $('#table-force-off').basictable({
+            forceResponsive: false
+        });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+
+        $('#table-two-axis').basictable();
+
+        $('#table-max-height').basictable({
+            tableWrapper: true
+        });
+    });
+</script>
+<!-- //js -->
+<script src="~/js/screenfull.js"></script>
+<script>
+    $(function () {
+        $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+        if (!screenfull.enabled) {
+            return false;
+        }
+
+
+
+        $('#toggle').click(function () {
+            screenfull.toggle($('#container')[0]);
+        });
+    });
+</script>
+<script src="~/js/jquery.nicescroll.js"></script>
+<script src="~/js/scripts.js"></script>
+
+<script type="text/javascript" src="~/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/js/bootstrap-3.1.1.min.js"></script>

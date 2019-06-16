@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "ItemMasterCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">Create New Item </h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Item Category</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <select name="ItemCategoryId" id="ItemCategoryId" class="form-control1 icon">
+                                                @{
+                                                    var itemCategoryList = ViewBag.ItemCategory as List<SaffronHotelAdminManagement_MVC4.ItemCategory>;
+                                                }
+                                                @foreach (var item in itemCategoryList)
+                                                {
+                                                    <option value="@item.ItemCategory_ID">@item.ItemCategoryName</option>
+                                                }
+                                            </select>
+                                            <a class="input-group-addon addbtn" href="@Url.Action("ItemCategoryCreate","Admin")"><img src="~/images/add_1.png" title="Create New Item Category" /></a>
+                                        </div>
+                                        <script>
+                                            $(function () {
+                                                checkItemCategory();
+                                            });
+                                            $("#ItemCategoryId").change(function () {
+                                                checkItemCategory()
+                                            });
+                                            function checkItemCategory() {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "/Admin/ItemMasterCreate_CheckMenuItem",
+                                                    data: '{ItemCategory_Id:"' + $("#ItemCategoryId").val() + '"}',
+                                                    contentType: "application/json; charset=utf-8",
+                                                    dataType: "json",
+                                                    success: modifyDesign,
+                                                    failure: function (response) {
+                                                        alert('fail');
+                                                        alert(response.responseText);
+                                                    },
+                                                    error: function (response) {
+                                                        alert('error');
+                                                        alert(response.responseText);
+                                                    }
+                                                });
+                                            }
+                                            function modifyDesign(response) {
+                                                var model = response;
+                                                if (model) {
+                                                    document.getElementById('temp').style.display = 'none';
+                                                    //document.getElementById('itemRate').style.display = 'block';
+                                                    //document.getElementById('itemVeg').style.display = 'block';
+                                                }
+                                                else {
+                                                    document.getElementById('temp').style.display = 'block';
+                                                    //document.getElementById('itemRate').style.display = 'none';
+                                                    //document.getElementById('itemVeg').style.display = 'none';
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="itemName">
+                                    <label class="col-md-2 control-label">Item Name</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-cutlery"></i>
+                                            </span>
+                                            <input type="text" name="ItemName" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="itemRate">
+                                    <label class="col-md-2 control-label">Rate</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-inr"></i>
+                                            </span>
+                                            <input type="text" name="Rate" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="itemCGST">
+                                    <label class="col-md-2 control-label">CGST</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-percent"></i>
+                                            </span>
+                                            <input type="number" name="cgst" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="itemSGST">
+                                    <label class="col-md-2 control-label">SGST</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-percent"></i>
+                                            </span>
+                                            <input type="number" name="sgst" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="temp">
+                                    <div class="form-group" id="itemRe-OrderLevel">
+                                        <label class="col-md-2 control-label">Re-OrderLevel</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-circle"></i>
+                                                </span>
+                                                <input type="number" name="ROLevel" class="form-control1 icon" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="itemMinQty">
+                                        <label class="col-md-2 control-label">Minimum Qunatity</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-circle"></i>
+                                                </span>
+                                                <input type="number" name="MinQty" class="form-control1 icon" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="itemVeg">
+                                    <div class="col-sm-offset-2">
+                                        <div class="checkbox">
+                                            <label style="margin-left:17px;">
+                                                <input type="checkbox" name="veg" />
+                                                Veg.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Save" class="frmButton" />
+                                    <a href="@Url.Action("ItemMasterInformation","Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+            </div>
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+    </div>
+    <!-- //inner_content-->
+</div>

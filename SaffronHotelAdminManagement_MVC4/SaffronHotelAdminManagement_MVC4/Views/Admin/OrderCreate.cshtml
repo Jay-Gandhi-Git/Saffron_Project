@@ -1,0 +1,289 @@
+﻿@model SaffronHotelAdminManagement_MVC4.CustomerDetail
+@{
+    ViewBag.Title = "OrderCreate";
+    Layout = "~/Views/Shared/Outer_LayoutPage.cshtml";
+}
+
+
+<script type="text/javascript">
+    jQuery(window).load(function () {
+        //jQuery("#status").fadeOut();
+        jQuery("#preloader").delay(1800).fadeOut("slow");
+    })
+</script>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+<div class="wthree_agile_admin_info">
+    <!-- /w3_agileits_top_nav-->
+    <!-- /nav-->
+    <!-- //w3_agileits_top_nav-->
+    <!-- /inner_content-->
+    <div class="inner_content">
+        <!-- /inner_content_w3_agile_info-->
+        <!-- breadcrumbs -->
+        
+        <!-- //breadcrumbs -->
+
+        <div class="inner_content_w3_agile_info two_in">
+            @*<h2 class="w3_inner_tittle">Inputs</h2>*@
+
+            <!--/forms-->
+            <div class="forms-main_agileits">
+
+                <!--/forms-inner-->
+                <div class="forms-inner">
+
+                    <div class="wthree_general">
+
+                        <script>
+                            function yesnoCheck() {
+                                if (document.getElementById('yesCheck').checked) {
+                                    document.getElementById('tmp').style.display = 'block';
+                                }
+                                else if (document.getElementById('noCheck').checked) {
+                                    document.getElementById('tmp').style.display = 'none';
+                                }
+                            }
+                            $(function () {
+                                getTableNumber();
+                            });
+                            function getTableNumber()
+                            {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Admin/OrderCreate_TableNumber_Bind",
+                                    data: '{Floor_Id:"' + $("#FloorNumber_Id").val() + '",TableType_Id:"' + $("#TableType_Id").val() + '"}',
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: getTableNumberData,
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                    },
+                                    error: function (response) {
+                                        alert(response.responseText);
+                                    }
+                                });
+                            }
+                            function getTableNumberData(response)
+                            {
+                                var model = response;
+                                $("#Table_Id").html("");
+                                for (var i = 0; i < model.length; i++) {
+                                    var s = model[i];
+                                    $("#Table_Id").append($('<option></option>').val(s.Table_ID).html(s.TableNo));
+                                }
+                                getTableCapacity();
+                            }
+                            function getTableCapacity()
+                            {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Admin/OrderCreate_TableCapacity_Bind",
+                                    data: '{Table_Id:"' + $("#Table_Id").val() + '"}',
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: getTableCapacityData,
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                    },
+                                    error: function (response) {
+                                        alert('Data not found | Table Capacity and Table Number');
+                                        $("#tblCapacity").html("");
+                                        $("#tblCapacity").val("");
+                                        //alert(response.responseText);
+                                    }
+                                });
+                            }
+                            function getTableCapacityData(response)
+                            {
+                                var model = response;
+                                $("#tblCapacity").html("");
+                                $("#tblCapacity").val(model);
+                            }
+                        </script>
+
+                        <div class="grid-1 graph-form agile_info_shadow">
+                            <h3 class="w3_inner_tittle two">New Order</h3>
+                            @if (ViewBag.errorMsg != null)
+                            {
+                                <span style="color:#ff3333;font-family:sans-serif;letter-spacing:1px;">@ViewBag.errorMsg</span>
+                            }
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Bill Number</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-circle"></i>
+                                            </span>
+                                            <input type="number" id="number" value="@ViewBag.srno"  name="number" class="form-control1 icon" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Order Type</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user-md"></i>
+                                            </span>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="OrderType" id="yesCheck" value="Dining" checked onclick="yesnoCheck()"/><span class="control-label">Dining</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="OrderType" id="noCheck" value="Take away" onclick="yesnoCheck()" /><span class="control-label" >Take away</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="tmp">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Floor No</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-table"></i>
+                                                </span>
+                                                <select name="FloorNumber_Id" onchange="getTableNumber();" id="FloorNumber_Id" class="form-control1 icon">
+                                                    @{
+                                                        var FloorNumberList = ViewBag.FloorNumber as List<SaffronHotelAdminManagement_MVC4.Floor>;
+                                                    }
+                                                    @foreach (var item in FloorNumberList)
+                                                    {
+                                                        <option value="@item.Floor_ID">@item.FloorNo</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Table Type</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-table"></i>
+                                                </span>
+                                                <select name="TableType_Id" id="TableType_Id" onchange="getTableNumber();" class="form-control1 icon">
+                                                    @{
+                                                            var TableTypeList = ViewBag.TableType as List<SaffronHotelAdminManagement_MVC4.TableType>;
+                                                        }
+                                                        @foreach (var item in TableTypeList)
+                                                        {
+                                                            <option value="@item.TableType_ID">@item.TableName</option>
+                                                        }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Table Number</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-table"></i>
+                                                </span>
+                                                <select name="Table_Id" id="Table_Id" class="form-control1 icon" onchange="getTableCapacity();">
+                                                    @*@{
+                                                        var TableNumberList = ViewBag.TableNumber as List<SaffronHotelAdminManagement_MVC4.TableMaster>;
+                                                    }
+                                                    @foreach (var item in TableNumberList)
+                                                    {
+                                                        <option value="@item.Table_ID">@item.TableNo</option>
+                                                    }*@
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Waiter</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                <select name="WaiterMaster_Id" class="form-control1 icon">
+                                                    @{
+                                                        var WaiterList = ViewBag.WaiterName as List<SaffronHotelAdminManagement_MVC4.WaiterMaster>;
+                                                    }
+                                                    @foreach (var item in WaiterList)
+                                                    {
+                                                        <option value="@item.WaiterMaster_Id">@item.WaiterName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Table Capacity</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-table"></i>
+                                                </span>
+                                                <input type="text" name="tblCapacity" id="tblCapacity" class="form-control1 icon" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+
+
+
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Customer Name</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" name="cname"  class="form-control1 icon" value="@Model.CustomerName" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Contact Number</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-mobile"></i>
+                                            </span>
+                                            <input type="text" name="cnumber" class="form-control1 icon" value="@Model.MobileNo" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Date</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="date" name="date"  class="form-control1 icon" value="@ViewBag.Date"  />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-2">
+                                    <input type="submit" value="Next" class="frmButton" />
+                                    <a href="@Url.Action("Index","Admin")" class="btn btn-default">
+                                        Back
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <!--//set-4-->
+                </div>
+                <!--//forms-inner-->
+            </div>
+        </div>
+        <!-- //inner_content_w3_agile_info-->
+    </div>
+    <!-- //inner_content-->
+</div>
+

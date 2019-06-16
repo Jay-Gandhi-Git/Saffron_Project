@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Saffron_DBModelStoreContainer" CdmEntityContainer="SaffronModel">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="Saffron_DBModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerDetails">
+      <EntityTypeMapping TypeName="Saffron_DBModel.CustomerDetail">
+        <MappingFragment StoreEntitySet="CustomerDetails">
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Floors">
+      <EntityTypeMapping TypeName="Saffron_DBModel.Floor">
+        <MappingFragment StoreEntitySet="Floor">
+          <ScalarProperty Name="Floor_ID" ColumnName="Floor_ID" />
+          <ScalarProperty Name="FloorNo" ColumnName="FloorNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemCategories">
+      <EntityTypeMapping TypeName="Saffron_DBModel.ItemCategory">
+        <MappingFragment StoreEntitySet="ItemCategory">
+          <ScalarProperty Name="ItemCategory_ID" ColumnName="ItemCategory_ID" />
+          <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+          <ScalarProperty Name="IsMenuItem" ColumnName="IsMenuItem" />
+          <ScalarProperty Name="IsAssets" ColumnName="IsAssets" />
+          <ScalarProperty Name="IsService" ColumnName="IsService" />
+          <ScalarProperty Name="IsRawMetirial" ColumnName="IsRawMetirial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemMasters">
+      <EntityTypeMapping TypeName="Saffron_DBModel.ItemMaster">
+        <MappingFragment StoreEntitySet="ItemMaster">
+          <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+          <ScalarProperty Name="ItemCategory_ID" ColumnName="ItemCategory_ID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="IsVeg" ColumnName="IsVeg" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="ReOrderLevel" ColumnName="ReOrderLevel" />
+          <ScalarProperty Name="MinimumQuantatity" ColumnName="MinimumQuantatity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemUsedStocks">
+      <EntityTypeMapping TypeName="Saffron_DBModel.ItemUsedStock">
+        <MappingFragment StoreEntitySet="ItemUsedStock">
+          <ScalarProperty Name="Stock_ID" ColumnName="Stock_ID" />
+          <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetailMasters">
+      <EntityTypeMapping TypeName="Saffron_DBModel.OrderDetailMaster">
+        <MappingFragment StoreEntitySet="OrderDetailMaster">
+          <ScalarProperty Name="OrderDetail_ID" ColumnName="OrderDetail_ID" />
+          <ScalarProperty Name="OrderMaster_ID" ColumnName="OrderMaster_ID" />
+          <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="IsKOT" ColumnName="IsKOT" />
+          <ScalarProperty Name="IsKOTProcess" ColumnName="IsKOTProcess" />
+          <ScalarProperty Name="IsKOTComplete" ColumnName="IsKOTComplete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderMasters">
+      <EntityTypeMapping TypeName="Saffron_DBModel.OrderMaster">
+        <MappingFragment StoreEntitySet="OrderMaster">
+          <ScalarProperty Name="OrderMaster_ID" ColumnName="OrderMaster_ID" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="Table_ID" ColumnName="Table_ID" />
+          <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+          <ScalarProperty Name="IsCancle" ColumnName="IsCancle" />
+          <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+          <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="Saffron_DBModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="Paymnet_Id" ColumnName="Paymnet_Id" />
+          <ScalarProperty Name="OrderMaster_Id" ColumnName="OrderMaster_Id" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PayementDate" ColumnName="PayementDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="Saffron_DBModel.Purchase">
+        <MappingFragment StoreEntitySet="Purchase">
+          <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+          <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseDetails">
+      <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseDetail">
+        <MappingFragment StoreEntitySet="PurchaseDetails">
+          <ScalarProperty Name="PurchaseDetail_ID" ColumnName="PurchaseDetail_ID" />
+          <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+          <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableTypes">
+      <EntityTypeMapping TypeName="Saffron_DBModel.TableType">
+        <MappingFragment StoreEntitySet="TableType">
+          <ScalarProperty Name="TableType_ID" ColumnName="TableType_ID" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="Saffron_DBModel.Vendor">
+        <MappingFragment StoreEntitySet="Vendor">
+          <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="GstNo" ColumnName="GstNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaiterAttendences">
+      <EntityTypeMapping TypeName="Saffron_DBModel.WaiterAttendence">
+        <MappingFragment StoreEntitySet="WaiterAttendence">
+          <ScalarProperty Name="WaiterAttendence_Id" ColumnName="WaiterAttendence_Id" />
+          <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaiterMasters">
+      <EntityTypeMapping TypeName="Saffron_DBModel.WaiterMaster">
+        <MappingFragment StoreEntitySet="WaiterMaster">
+          <ScalarProperty Name="WaiterMaster_Id" ColumnName="WaiterMaster_Id" />
+          <ScalarProperty Name="WaiterName" ColumnName="WaiterName" />
+          <ScalarProperty Name="ContctNo" ColumnName="ContctNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AdharCardNo" ColumnName="AdharCardNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableMasters">
+      <EntityTypeMapping TypeName="Saffron_DBModel.TableMaster">
+        <MappingFragment StoreEntitySet="TableMaster">
+          <ScalarProperty Name="TableNo" ColumnName="TableNo" />
+          <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+          <ScalarProperty Name="TableType_ID" ColumnName="TableType_ID" />
+          <ScalarProperty Name="Floor_ID" ColumnName="Floor_ID" />
+          <ScalarProperty Name="Table_ID" ColumnName="Table_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseReturns">
+      <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseReturn">
+        <MappingFragment StoreEntitySet="PurchaseReturn">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+          <ScalarProperty Name="PurchaseReturn_ID" ColumnName="PurchaseReturn_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseReturnDetails">
+      <EntityTypeMapping TypeName="Saffron_DBModel.PurchaseReturnDetail">
+        <MappingFragment StoreEntitySet="PurchaseReturnDetail">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Quatntity" ColumnName="Quatntity" />
+          <ScalarProperty Name="ItemMaster_ID" ColumnName="ItemMaster_ID" />
+          <ScalarProperty Name="PurchaseReturn_ID" ColumnName="PurchaseReturn_ID" />
+          <ScalarProperty Name="PurchaseReturnDetail_ID" ColumnName="PurchaseReturnDetail_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
